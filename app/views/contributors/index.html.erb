@@ -1,0 +1,17 @@
+<h1>Listing contributors</h1>
+<%= link_to 'New contributor', new_contributor_path %>
+<table>
+  <tr>
+    <th></th>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>
+ 
+  <% @contributors.each do |contributor| %>
+    <tr>
+      <td><%= contributor.id %></td>
+      <td><%= contributor.firstName %></td>
+      <td><%= contributor.lastName %></td>
+    </tr>
+  <% end %>
+</table>
