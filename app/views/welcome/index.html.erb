@@ -1,8 +1,13 @@
 <h1>Budget on rails!</h1>
 <% if current_user %>
-	Logged in as <%= current_user.firstName %>
-	<%= link_to "Log out", log_out_path %>
-	<%= link_to "Contributors", contributors_path %>
+	<p>
+		Logged in as <%= current_user.firstName %>
+		<img src="<%= user_image %>">
+		<%= link_to "Log out", log_out_path %>
+	</p>
+	<p>
+		<%= link_to "Contributors", contributors_path %>
+	</p>
 <% else %>
 	<%= link_to 'Login','/auth/google_oauth2' %>
 <% end %>

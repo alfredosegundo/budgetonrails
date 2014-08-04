@@ -5,6 +5,8 @@
     <th></th>
     <th>First Name</th>
     <th>Last Name</th>
+    <th>Email</th>
+    <th colspan="3"></th>
   </tr>
  
   <% @contributors.each do |contributor| %>
@@ -12,6 +14,10 @@
       <td><%= contributor.id %></td>
       <td><%= contributor.firstName %></td>
       <td><%= contributor.lastName %></td>
+      <td><%= contributor.email %></td>
+      <td><%= link_to 'Show', contributor_path(contributor) %></td>
+      <td><%= link_to 'Edit', edit_contributor_path(contributor) %></td>
+      <td><%= link_to 'Destroy', contributor_path(contributor), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

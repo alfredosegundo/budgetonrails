@@ -1,6 +1,7 @@
 <p>
   <strong>Contributor:</strong>
-  <%= @contributor.firstName + " " + @contributor.lastName %>
+  <%= @contributor.firstName + " " + @contributor.lastName %> (<%= @contributor.email %>)
 </p>
 
-<%= link_to 'Back', contributors_path %>
+<%= link_to 'Back', contributors_path %> |
+<%= link_to 'Edit', edit_contributor_path(@contributor) %>

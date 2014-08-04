@@ -1,5 +1,16 @@
 <h1>New Contributor</h1>
 <%= form_for :contributor, url: contributors_path do |f| %>
+  <% if @contributor.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@contributor.errors.count, "error") %> prohibited
+      this contributor from being saved:</h2>
+    <ul>
+    <% @contributor.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
   <p>
     <%= f.label :firstName %><br>
     <%= f.text_field :firstName %>
@@ -8,6 +19,16 @@
   <p>
     <%= f.label :lastName %><br>
     <%= f.text_field :lastName %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :email_confirmation %><br>
+    <%= f.text_field :email_confirmation %>
   </p>
  
   <p>

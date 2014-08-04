@@ -1,0 +1,30 @@
+<h1>Editing contributor</h1>
+ 
+<%= form_for :contributor, url: contributor_path(@contributor), method: :patch do |f| %>
+  <% if @contributor.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@contributor.errors.count, "error") %> prohibited
+      this contributor from being saved:</h2>
+    <ul>
+    <% @contributor.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :firstName %><br>
+    <%= f.text_field :firstName %>
+  </p>
+ 
+  <p>
+    <%= f.label :lastName %><br>
+    <%= f.text_field :lastName %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', contributors_path %>
