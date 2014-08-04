@@ -1,6 +1,5 @@
 class ContributorsController < ApplicationController
 
-	http_basic_authenticate_with name: "aaocs", password: "aaocs", except: [:index, :show]
 	def index
 		@contributors = Contributor.all
 	end
@@ -10,7 +9,6 @@ class ContributorsController < ApplicationController
 
 	def create
 		@contributor = Contributor.new(article_params)
-
 		@contributor.save
 		redirect_to @contributor
 	end
