@@ -43,7 +43,9 @@ gem "omniauth-google-oauth2"
 # add foundation
 gem 'zurb-foundation'
 
-gem 'rails_serve_static_assets', group: [:production]
+# Heroku solution to serve static assets
+gem 'rails_serve_static_assets'
+gem 'rails_stdout_logging'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
