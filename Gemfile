@@ -43,6 +43,8 @@ gem "omniauth-google-oauth2"
 # add foundation
 gem 'zurb-foundation'
 
+gem 'rails_serve_static_assets', group: [:production]
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end
