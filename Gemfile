@@ -1,4 +1,3 @@
-ruby '2.0.0'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -40,6 +39,9 @@ gem 'spring',        group: :development
 
 # add oauth auth
 gem "omniauth-google-oauth2"
+
+# add foundation
+gem 'zurb-foundation'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'

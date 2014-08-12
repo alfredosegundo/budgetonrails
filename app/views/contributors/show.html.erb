@@ -3,5 +3,40 @@
   <%= @contributor.firstName + " " + @contributor.lastName %> (<%= @contributor.email %>)
 </p>
 
-<%= link_to 'Back', contributors_path %> |
-<%= link_to 'Edit', edit_contributor_path(@contributor) %>
+<% if @contributor.contributions.any? %>
+	<table>
+	  <tr>
+	    <th></th>
+	    <th>Value</th>
+	    <th>Since</th>
+	  </tr>
+	 
+	  <% @contributor.contributions.each do |contribution| %>
+	    <tr>
+	      <td><%= contribution.id %></td>
+	      <td><%= contribution.amount %></td>
+	      <td><%= contribution.created_at.to_formatted_s(:long) %></td>
+	      <td><%= link_to 'Edit', edit_contributor_contribution_path(contribution.contributor, contribution) %></td>
+	      <td><%= link_to 'Destroy', contributor_contribution_path(contribution.contributor, contribution), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    </tr>
+	  <% end %>
+	</table>
+<% end %>
+
+<h5>Add a contribution</h5>
+<%= form_for([@contributor, @contributor.contributions.build]) do |f| %>
+  <div class="row">
+    <div class="small-1 small-offset-7 columns">
+      <%= f.label :amount, "R$", class: "prefix" %>
+    </div>
+    <div class="small-4 columns">
+      <%= f.text_field :amount %>
+    </div>
+  </div>
+	<div class="row">
+		<%= f.submit "Save", class: "button tiny right" %>
+	</div>
+<% end %>
+
+<%= link_to 'Back', contributors_path, class: "button tiny" %> |
+<%= link_to 'Edit', edit_contributor_path(@contributor), class: "button tiny" %>

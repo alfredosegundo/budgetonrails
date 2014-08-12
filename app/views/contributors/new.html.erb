@@ -11,29 +11,43 @@
     </ul>
   </div>
   <% end %>
-  <p>
-    <%= f.label :firstName %><br>
-    <%= f.text_field :firstName %>
-  </p>
- 
-  <p>
-    <%= f.label :lastName %><br>
-    <%= f.text_field :lastName %>
-  </p>
-
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
-
-  <p>
-    <%= f.label :email_confirmation %><br>
-    <%= f.text_field :email_confirmation %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="row">
+    <div class="small-3 columns">
+      <%= f.label :firstName, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :firstName %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <%= f.label :lastName, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :lastName %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <%= f.label :email, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <%= f.label :email_confirmation, class: "right inline" %>
+    </div>
+    <div class="small-9 columns">
+      <%= f.text_field :email_confirmation %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-9 small-offset-3 columns">
+      <%= f.submit %>
+    </div>
+  </div>
 <% end %>
 
 <%= link_to 'Back', contributors_path %>
