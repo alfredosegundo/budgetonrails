@@ -2,6 +2,7 @@ class Contribution < ActiveRecord::Base
   belongs_to :contributor
   validate :same_month_same_contributor
 
+  private
   def same_month_same_contributor
   	first_month_day = self.created_at.beginning_of_month
   	last_month_day = self.created_at.end_of_month
@@ -10,4 +11,3 @@ class Contribution < ActiveRecord::Base
   	end
   end
 end
-

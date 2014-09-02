@@ -1,0 +1,20 @@
+<p>
+  <h3>Expense</h3>
+</p>
+
+<% if @expense.contributor %>
+  <p>
+    Contributor: <%= link_to @expense.contributor.firstName, contributor_path(@expense.contributor) %>
+  </p>
+<% end %>
+
+<p>
+  Description: <%= @expense.description %>
+</p>
+
+<p>
+  Value: <%= @expense.value %>
+</p>
+
+<%= link_to 'Back', expenses_path, class: "button tiny" %> |
+<%= link_to 'Edit', edit_expense_path(@expense), class: "button tiny" %>

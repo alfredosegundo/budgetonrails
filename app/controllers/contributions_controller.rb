@@ -2,6 +2,7 @@ class ContributionsController < ApplicationController
 
 	def create
 		@contributor = Contributor.find(params[:contributor_id])
+		puts strong_params
 	    @contribution = @contributor.contributions.create(strong_params)
 	    redirect_to contributor_path(@contributor)
 	end
@@ -15,7 +16,6 @@ class ContributionsController < ApplicationController
 
 private
     def strong_params
-    	params[:contribution][:created_at] = DateTime.now
 		params.require(:contribution).permit(:amount, :created_at)
     end
 end

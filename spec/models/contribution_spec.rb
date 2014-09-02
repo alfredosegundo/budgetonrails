@@ -12,7 +12,7 @@ RSpec.describe Contribution, :type => :model do
 		newC = FakeContribution(creation_date, contributor)
 		newC.save
 
-		expect(Contribution.all.length).to eq(1)
+		expect(Contribution.count).to eq(1)
 	end
 
 	def CreateContributor
