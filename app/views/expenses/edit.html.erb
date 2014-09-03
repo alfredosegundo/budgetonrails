@@ -11,24 +11,38 @@
   </div>
   <% end %>
   <div class="row">
-    <div class="small-3 columns">
+    <div class="small-2 columns">
       <%= f.label :description, class: "right inline" %>
     </div>
-    <div class="small-9 columns">
+    <div class="small-5 columns end">
       <%= f.text_area :description %>
     </div>
   </div>
   <div class="row">
-    <div class="small-1 small-offset-7 columns">
+    <div class="small-2 columns">
+      <%= f.label :value, class: "right inline" %>
+    </div>
+    <div class="small-1 columns">
       <%= f.label :value, "R$", class: "prefix" %>
     </div>
-    <div class="small-4 columns">
+    <div class="small-4 columns end">
       <%= f.text_field :value %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :budget_date, "Budget", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "expense", "budget_date", order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' } %>
     </div>
   </div>
   <% if @contributors.any? %>
     <div class="row">
-      <%= select_tag(:contributor_id, options_for_select(@contributors, @selected_contributor), class: "small-5 small-offset-7 columns") %>
+      <div class="small-2 columns">
+        <%= f.label :contributor_id, "Contributor", class: "right inline" %>
+      </div>
+      <%= select_tag(:contributor_id, options_for_select(@contributors, @selected_contributor), class: "small-3 columns end") %>
     </div>
   <% end %>
  
