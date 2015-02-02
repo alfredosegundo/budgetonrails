@@ -1,6 +1,11 @@
 <p>
 	Budget in <%= Date.today.strftime("%B %Y")  %>
 </p>
+<% if @total_contributions && @total_expenses %>
+<p>
+	Saldo: <%= @total_contributions - @total_expenses %>
+</p>
+<% end %>
 
 <ul class="small-block-grid-2">
 	<li>
