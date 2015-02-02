@@ -26,7 +26,7 @@
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
         <li class="name">
-          <h1><%= link_to "Início", home_url %></h1>
+          <h1><%= link_to "Início", "/" %></h1>
         </li>
         <li class="toggle-topbar menu-icon">
           <a href="#">
@@ -47,10 +47,6 @@
             <li><%= link_to 'Login','/auth/google_oauth2' %></li>
           <% end %>
         </ul>
-
-        <ul class="left">
-          <li><%= link_to "Expenses", expenses_path %></li>
-        </ul>
       </section>
     </nav>
 
@@ -59,7 +55,7 @@
     <% end %>
 
     <div class="row">
-      <div class="small-11 small-centered columns">
+      <div class="small-12 columns">
         <%= yield %>
       </div>
     </div>

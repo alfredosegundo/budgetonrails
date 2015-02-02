@@ -27,10 +27,10 @@
 <%= form_for([@contributor, @contributor.contributions.build]) do |f| %>
   <div class="row">
     <div class="small-2 columns">
-      <%= f.label :created_at, "Initial date:" %>
+      <%= f.label :budget_date, "Initial date:" %>
     </div>
     <div class="small-4 columns end">
-      <%= date_select "contribution", "created_at", order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' } %>
+      <%= date_select "contribution", "budget_date", order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' } %>
     </div>
   </div>
   <div class="row">

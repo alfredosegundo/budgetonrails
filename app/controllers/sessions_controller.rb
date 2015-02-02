@@ -7,7 +7,7 @@ class SessionsController  < ApplicationController
     		reset_session
     		session[:user_id] = user.id
     		session[:user_image] = auth["info"]["image"]
-		    redirect_to root_url, notice: "Logged in!"
+		    redirect_to home_url, notice: "Logged in!"
     	else
     		redirect_to root_url, notice: 'Login fail!'
     	end

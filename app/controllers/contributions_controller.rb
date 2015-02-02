@@ -16,6 +16,6 @@ class ContributionsController < ApplicationController
 
 private
     def strong_params
-		params.require(:contribution).permit(:amount, :created_at)
+		params.require(:contribution).permit(:amount, :budget_date)
     end
 end

@@ -17,4 +17,6 @@
 
 # Ignore env viriables
 .env
-Procfile
+
+# ignore bower components
+bower_components

@@ -1,0 +1,73 @@
+<p>
+	Budget in <%= Date.today.strftime("%B %Y")  %>
+</p>
+
+<ul class="small-block-grid-2">
+	<li>
+		<table>
+		  <thead>
+		    <tr>
+		      <th colspan="2">Saídas</th>
+		    </tr>
+		    <tr>
+			  <th>Descrição</th>
+		      <th>Valor</th>
+		    </tr>
+		  </thead>
+		  <tfoot>
+		    <tr>
+		      <td>Total</td>
+		      <td><%= @total_expenses %></td>
+		    </tr>
+		  </tfoot>
+		  <tbody>
+		  	<% if @expenses.blank? %>
+		  		<tr>
+		  			<td>empty</td>
+		  			<td>empty</td>
+		  		</tr>
+		  	<% end %>
+		  	<% @expenses.each do |e| %>
+			    <tr>
+			      <td><%= e.description %></td>
+			      <td>R$ <%= e.value %></td>
+			    </tr>
+		  	<% end %>
+		  </tbody>
+		</table>
+	</li>
+	<li>
+		<table>
+		  <thead>
+		    <tr>
+		      <th colspan="2">Entradas</th>
+		    </tr>
+		    <tr>
+			  <th>Descrição</th>
+		      <th>Valor</th>
+		    </tr>
+		  </thead>
+		  <tfoot>
+		    <tr>
+		      <td>Total</td>
+		      <td><%= @total_contributions %></td>
+		    </tr>
+		  </tfoot>
+		  <tbody>
+		  	<% if @contributions.blank? %>
+		  		<tr>
+		  			<td>empty</td>
+		  			<td>empty</td>
+		  		</tr>
+		  	<% else %>
+			  	<% @contributions.each do |c| %>
+				    <tr>
+				      <td>Salário de <%= c.contributor.firstName %></td>
+				      <td>R$ <%= c.amount %></td>
+				    </tr>
+			  	<% end %>
+		  	<% end %>
+		  </tbody>
+		</table>
+	</li>
+</ul>
