@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121032836) do
+ActiveRecord::Schema.define(version: 20150207185343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contribution_factors", force: true do |t|
+    t.decimal "factor"
+    t.date    "initial_date"
+  end
 
   create_table "contributions", force: true do |t|
     t.decimal  "amount"
