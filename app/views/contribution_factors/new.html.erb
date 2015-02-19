@@ -1,0 +1,35 @@
+<h3>New contribution factor</h3>
+<%= form_for :contribution_factor, url: contribution_factors_path do |f| %>
+  <% if @contribution_factor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contribution_factor.errors.count, "error") %> prohibited
+        this contribution_factor from being saved:</h2>
+      <ul>
+      <% @contribution_factor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :factor, class: "right inline" %>
+    </div>
+    <div class="small-5 columns end">
+      <%= f.text_field :factor %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :initial_date, "Initial date", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "contribution_factor", "initial_date", order: [:day, :month, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' } %>
+    </div>
+  </div>
+  <div class="row">
+      <%= f.submit "Save", class: "button tiny right" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', contribution_factors_path %>

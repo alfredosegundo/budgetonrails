@@ -1,0 +1,14 @@
+<p>
+  <h3>Contribution Factor</h3>
+</p>
+
+<p>
+  Factor: <%= @factor.factor %>
+</p>
+
+<p>
+  Initial date: <%= @factor.initial_date %>
+</p>
+
+<%= link_to 'Back', contribution_factors_path, class: "button tiny" %> |
+<%= link_to 'Edit', edit_contribution_factor_path(@factor), class: "button tiny" %>

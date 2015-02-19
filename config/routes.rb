@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   end
 
   resources :expenses
+  resources :contribution_factors
 end

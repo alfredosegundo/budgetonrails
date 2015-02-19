@@ -1,11 +1,16 @@
 <p>
 	Budget in <%= Date.today.strftime("%B %Y")  %>
 </p>
-<% if @total_contributions && @total_expenses %>
 <p>
-	Saldo: <%= @total_contributions - @total_expenses %>
+	<ul>
+		<li>
+			Saldo: <%= @balance %>
+		</li>
+		<li>
+			Contribution factor: <%= @contribution_factor * 100 %>%
+		</li>
+	</ul>
 </p>
-<% end %>
 
 <ul class="small-block-grid-2">
 	<li>
@@ -67,8 +72,8 @@
 		  	<% else %>
 			  	<% @contributions.each do |c| %>
 				    <tr>
-				      <td>Salário de <%= c.contributor.firstName %></td>
-				      <td>R$ <%= c.amount %></td>
+				      <td><%= c.contributor.firstName %></td>
+				      <td>R$ <%= c.amount * @contribution_factor %> (<%= c.amount %>)</td>
 				    </tr>
 			  	<% end %>
 		  	<% end %>

@@ -1,0 +1,21 @@
+<h1>Listing contribution factors</h1>
+<%= link_to 'New factor', new_contribution_factor_path, class: "button tiny" %>
+<table>
+  <tr>
+    <th></th>
+    <th>Factor</th>
+    <th>Initial date</th>
+    <th colspan="3"></th>
+  </tr>
+ 
+  <% @factors.each do |factor| %>
+    <tr>
+      <td><%= factor.id %></td>
+      <td><%= factor.factor %></td>
+      <td><%= factor.initial_date %></td>
+      <td><%= link_to 'Show', contribution_factor_path(factor) %></td>
+      <td><%= link_to 'Edit', edit_contribution_factor_path(factor) %></td>
+      <td><%= link_to 'Destroy', contribution_factor_path(factor), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
