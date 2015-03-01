@@ -1,5 +1,12 @@
 <p>
-	Budget in <%= Date.today.strftime("%B %Y")  %>
+	<%= form_for :dashboard, url: {action: "change_date"} do |f| %>
+		Ir para 
+		<%= date_select "dashboard", "budget_date", default: @budget_date, order: [:month, :year] %>
+		<input class="button tiny" name="commit" type="submit" value="Go!">
+	<% end %>
+</p>
+<p>
+	Budget in <%= @budget_date.strftime("%B %Y")  %>
 </p>
 <p>
 	<ul>
@@ -50,7 +57,7 @@
 		<table>
 		  <thead>
 		    <tr>
-		      <th colspan="2">Entradas</th>
+		      <th colspan="2">Contribuições</th>
 		    </tr>
 		    <tr>
 			  <th>Descrição</th>

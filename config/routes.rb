@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/home' => 'welcome#home', :as => 'home'
 
+  post 'welcome/home' => 'welcome#change_date'
   resources :contributors do
   	resources :contributions
   end
