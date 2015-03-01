@@ -26,7 +26,7 @@
     @contributions = Contribution.get_contributions_for_month(budget_date)
     @contribution_factor = ContributionFactor.find_for_month(budget_date).factor / 100
     @total_contributions = @contributions.map(&:amount).inject(0) { |sum, val| sum + val * @contribution_factor}
-    @balance = @total_contributions * @contribution_factor - @total_expenses if @contribution_factor
+    @balance = @total_contributions - @total_expenses if @contribution_factor
   end
   
   def home_params
