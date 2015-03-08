@@ -11,7 +11,7 @@
       <th>Since</th>
     </tr>
    
-    <% @contributor.contributions.order(:created_at).each do |contribution| %>
+    <% @contributor.contributions.order(:budget_date).each do |contribution| %>
       <tr>
         <td><%= contribution.id %></td>
         <td><%= contribution.amount %></td>
