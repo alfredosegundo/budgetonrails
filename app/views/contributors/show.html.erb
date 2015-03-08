@@ -15,7 +15,7 @@
       <tr>
         <td><%= contribution.id %></td>
         <td><%= contribution.amount %></td>
-        <td><%= contribution.created_at.strftime("%B %Y") %></td>
+        <td><%= contribution.budget_date.strftime("%B %Y") %></td>
         <td><%= link_to 'Edit', edit_contributor_contribution_path(contribution.contributor, contribution) %></td>
         <td><%= link_to 'Destroy', contributor_contribution_path(contribution.contributor, contribution), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

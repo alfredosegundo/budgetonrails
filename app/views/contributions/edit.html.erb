@@ -1,0 +1,35 @@
+<%= form_for :contribution, url: contributor_contribution_path(@contributor, @contribution), method: :patch do |f| %>
+  <% if @contribution.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@contribution.errors.count, "error") %> prohibited
+      this contribution from being saved:</h2>
+    <ul>
+    <% @contribution.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :amount, class: "right inline" %>
+    </div>
+    <div class="small-5 columns end">
+      <%= f.text_field :amount %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :budget_date, "Budget", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "contribution", "budget_date", order: [:month, :year] %>
+    </div>
+  </div>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', contributor_contributions_path %>
