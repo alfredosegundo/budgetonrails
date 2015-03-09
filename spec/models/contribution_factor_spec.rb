@@ -2,12 +2,25 @@ require 'rails_helper'
 
 RSpec.describe ContributionFactor, :type => :model do
 
-	it "should be only one per month" do
-		ContributionFactor.new(factor: 1, initial_date: Date.new(2015, 2, 1)).save
-		ContributionFactor.new(factor: 1, initial_date: Date.new(2015, 2, 12)).save
+	context "Uniquiess" do
+		it "should allow only one per month" do
+			ContributionFactor.new(factor: 1, initial_date: Date.new(2015, 2, 1)).save
+			ContributionFactor.new(factor: 1, initial_date: Date.new(2015, 2, 12)).save
 
-		expect(ContributionFactor.count).to eq(1)
+			expect(ContributionFactor.count).to eq(1)
+		end
+
+		it "should allow update" do
+			ContributionFactor.new(factor: 1, initial_date: Date.new(2015, 2, 1)).save
+			factor = ContributionFactor.all.first
+			factor.factor = 1.1
+
+			saved = factor.save
+
+			expect(saved).to be(true)
+		end
 	end
+
 
 	it "biggest factor should be 100" do
 		ContributionFactor.new(factor: 101, initial_date: Date.new(2015, 2, 1)).save
