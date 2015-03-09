@@ -24,7 +24,7 @@
       <%= f.label :initial_date, "Initial date", class: "right inline" %>
     </div>
     <div class="small-3 columns end">
-      <%= date_select "contribution_factor", "initial_date", order: [:day, :month, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' } %>
+      <%= date_select "contribution_factor", "initial_date", order: [:month, :year], prompt: {month: 'Select month', year: 'Select year' } %>
     </div>
   </div>
   <div class="row">

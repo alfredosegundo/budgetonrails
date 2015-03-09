@@ -1,2 +1,35 @@
-<h1>ContributionFactor#update</h1>
-<p>Find me in app/views/contribution_factor/update.html.erb</p>
+<%= form_for :contribution_factor, url: contribution_factor_path(@contribution_factor), method: :patch do |f| %>
+  <% if @contribution_factor.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@contribution_factor.errors.count, "error") %> prohibited
+      this contribution factor from being saved:</h2>
+    <ul>
+    <% @contribution_factor.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :factor, class: "right inline" %>
+    </div>
+    <div class="small-5 columns end">
+      <%= f.text_field :factor %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :initial_date, "Initial date", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "contribution_factor", "initial_date", order: [:month, :year] %>
+    </div>
+  </div>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', contribution_factors_path %>
