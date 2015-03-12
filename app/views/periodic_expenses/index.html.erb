@@ -1,0 +1,28 @@
+<h1>Listing periodic expenses</h1>
+<%= link_to 'New periodic expense', new_periodic_expense_path, class: "button tiny" %>
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Value</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th colspan="3"></th>
+  </tr>
+ 
+  <% @expenses.each do |expense| %>
+    <tr>
+      <td>
+        <%= expense.description[0..14] %>
+        <% if expense.description.length > 15 %>
+          ...
+        <% end %>
+      </td>
+      <td><%= expense.value %></td>
+      <td><%= expense.start_date %></td>
+      <td><%= expense.end_date %></td>
+      <td><%= link_to 'Show', periodic_expense_path(expense) %></td>
+      <td><%= link_to 'Edit', edit_periodic_expense_path(expense) %></td>
+      <td><%= link_to 'Destroy', periodic_expense_path(expense), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

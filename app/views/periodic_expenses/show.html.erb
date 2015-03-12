@@ -1,0 +1,22 @@
+<p>
+  <h3>Periodic expense</h3>
+</p>
+
+<p>
+  Description: <%= @expense.description %>
+</p>
+
+<p>
+  Value: <%= @expense.value %>
+</p>
+
+<p>
+  Start date: <%= @expense.start_date %>
+</p>
+
+<p>
+  End date: <%= @expense.end_date %>
+</p>
+
+<%= link_to 'Back', periodic_expenses_path, class: "button tiny" %> |
+<%= link_to 'Edit', edit_periodic_expense_path(@expense), class: "button tiny" %>

@@ -49,9 +49,13 @@
         </ul>
 
         <ul class="left">
-          <li><%= link_to "Expenses", expenses_path %></li>
-        </ul>
-        <ul class="left">
+          <li class="has-dropdown"><%= link_to "Expenses", expenses_path %>
+            <ul class="dropdown">
+              <li><label>escolha o tipo</label></li>
+              <li><%= link_to "Única", expenses_path %></li>
+              <li><%= link_to "Por período", periodic_expenses_path %></li>
+            </ul>
+          </li>
           <li><%= link_to "Contribution Factors", contribution_factors_path %></li>
         </ul>
       </section>
