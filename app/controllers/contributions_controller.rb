@@ -16,7 +16,7 @@ class ContributionsController < ApplicationController
 	    @contribution = Contribution.find(params[:id])
 	    @contributor = Contributor.find(@contribution.contributor_id)
 	    if @contribution.update(strong_params)
-	      redirect_to contributor_path
+	      redirect_to @contributor
 	    else
 	      render 'edit'
 	    end

@@ -14,7 +14,7 @@ class Contribution < ActiveRecord::Base
     self.budget_date = self.budget_date.midnight
   	first_month_day = self.budget_date.beginning_of_month
   	last_month_day = self.budget_date.end_of_month
-  	if Contribution.where(:contributor_id => self.contributor.id)
+  	if new_record? && Contribution.where(:contributor_id => self.contributor.id)
                    .where(:budget_date => first_month_day..last_month_day).any?
   		errors.add(:budget_date, "can't be two in the same month")
   	end

@@ -30,6 +30,18 @@ RSpec.describe Contribution, :type => :model do
 		expect(contrib.budget_date).to eq(DateTime.new(2015,01,24,0,0,0))
 	end
 
+	it "should be able to update a contribution" do
+		contributor = Contributor.new(firstName: 'any', lastName: 'any', email: 'any')
+		contributor.save
+		contribution = Contribution.new(:budget_date => DateTime.new(2015,03,12), :contributor => contributor, :amount => 0)
+		contribution.save
+		contribution.amount = 1
+		contribution.save
+
+		updatedContribution = Contribution.first
+		expect(updatedContribution.amount).to eq(1)
+	end
+
 	def CreateContributor
 		Contributor.new(firstName: 'any', lastName: 'any', email: 'any')
 	end
