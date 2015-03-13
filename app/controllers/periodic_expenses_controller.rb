@@ -21,13 +21,27 @@ class PeriodicExpensesController < ApplicationController
   end
 
   def edit
+    @expense = PeriodicExpense.find(params[:id])
+  end
+
+  def update
+    @expense = PeriodicExpense.find(params[:id])
+    if @expense.update(expense_params)
+      redirect_to @expense
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    @expense = PeriodicExpense.find(params[:id])
+    @expense.destroy
+
+    redirect_to periodic_expenses_path
   end
 
   private
   def expense_params
-    params.require(:periodic_expense).permit(:description, :value, :start_date, :end_date)
+    params.require(:expense).permit(:description, :value, :start_date, :end_date)
   end
 end
