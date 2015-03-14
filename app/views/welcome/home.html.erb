@@ -38,11 +38,17 @@
 		    </tr>
 		  </tfoot>
 		  <tbody>
-		  	<% if @expenses.blank? %>
+		  	<% if @periodic_expenses.blank? && @expenses.blank? %>
 		  		<tr>
 		  			<td>empty</td>
 		  			<td>empty</td>
 		  		</tr>
+		  	<% end %>
+		  	<% @periodic_expenses.each do |e| %>
+			    <tr>
+			      <td><%= e.description %></td>
+			      <td>R$ <%= e.value %></td>
+			    </tr>
 		  	<% end %>
 		  	<% @expenses.each do |e| %>
 			    <tr>

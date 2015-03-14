@@ -1,6 +1,6 @@
 class Expense < ActiveRecord::Base
   belongs_to :contributor
-  before_save :move_dates_to_utc
+  before_save :set_buget_date_to_midnight
 
   def self.get_expenses_same_month_of(date)
     first_day_month = date.beginning_of_month
@@ -16,7 +16,7 @@ class Expense < ActiveRecord::Base
     budget_date.strftime("%B %Y")
   end
 
-  def move_dates_to_utc
+  def set_buget_date_to_midnight
     self.budget_date = self.budget_date.midnight
   end
 end
