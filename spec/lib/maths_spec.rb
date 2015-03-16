@@ -1,4 +1,5 @@
-require "Maths"
+require 'rails_helper.rb'
+require 'Maths'
 
 RSpec.describe Maths do
 	context "sum" do
