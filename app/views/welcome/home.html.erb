@@ -6,7 +6,7 @@
 	<% end %>
 </p>
 <p>
-	Budget in <%= @budget_date.strftime("%B %Y")  %>
+	Budget in <%= @presenter.budget_date  %>
 </p>
 <p>
 	<ul>
@@ -28,32 +28,20 @@
 		    </tr>
 		    <tr>
 			  <th>Descrição</th>
-		      <th>Valor</th>
+		      <th>Valor (R$)</th>
 		    </tr>
 		  </thead>
 		  <tfoot>
 		    <tr>
 		      <td>Total</td>
-		      <td><%= @total_expenses %></td>
+		      <td><%= @presenter.total_expenses %></td>
 		    </tr>
 		  </tfoot>
 		  <tbody>
-		  	<% if @periodic_expenses.blank? && @expenses.blank? %>
-		  		<tr>
-		  			<td>empty</td>
-		  			<td>empty</td>
-		  		</tr>
-		  	<% end %>
-		  	<% @periodic_expenses.each do |e| %>
+		  	<% @presenter.expenses.each do |e| %>
 			    <tr>
 			      <td><%= e.description %></td>
-			      <td>R$ <%= e.value %></td>
-			    </tr>
-		  	<% end %>
-		  	<% @expenses.each do |e| %>
-			    <tr>
-			      <td><%= e.description %></td>
-			      <td>R$ <%= e.value %></td>
+			      <td><%= e.value %></td>
 			    </tr>
 		  	<% end %>
 		  </tbody>

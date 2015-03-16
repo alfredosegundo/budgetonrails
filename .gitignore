@@ -20,3 +20,6 @@
 
 # ignore bower components
 bower_components
+
+# ignore gems
+/vendor/bundle
