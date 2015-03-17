@@ -1,4 +1,4 @@
-require "Maths"
+require "maths.rb"
 
 class WelcomeHomePresenter
 
