@@ -128,4 +128,30 @@ RSpec.describe WelcomeHomePresenter do
       expect(result).to eq 1
     end
   end
+
+  describe "#contribution_factor_multiplier" do
+    it "should be 0 when contribution_factor is empty" do
+      presenter = WelcomeHomePresenter.new
+
+      result = presenter.contribution_factor_multiplier
+
+      expect(result).to eq 0
+    end
+
+    it "should be decimal mutiplier of contribution_factor percentage" do
+      presenter = WelcomeHomePresenter.new(contribution_factor: ContributionFactor.new(factor: 100))
+
+      result = presenter.contribution_factor_multiplier
+
+      expect(result).to eq 1
+    end
+
+    it "should preserve two decimal cases from contribution_factor" do
+      presenter = WelcomeHomePresenter.new(contribution_factor: ContributionFactor.new(factor: 99))
+
+      result = presenter.contribution_factor_multiplier
+
+      expect(result).to eq 0.99
+    end
+  end
 end

@@ -10,6 +10,10 @@ class WelcomeHomePresenter
     @contribution_factor = contribution_factor
   end
 
+  def contribution_factor_multiplier
+    return self.contribution_factor / 100
+  end
+
   def contribution_factor
     return @contribution_factor.factor if @contribution_factor.respond_to? :factor
     0

@@ -68,7 +68,7 @@
         <% @presenter.contributions.each do |c| %>
           <tr>
             <td><%= c.contributor.firstName %></td>
-            <td>R$ <%= c.amount * @contribution_factor %> (<%= c.amount %>)</td>
+            <td>R$ <%= c.amount * @presenter.contribution_factor_multiplier %> (<%= c.amount %>)</td>
           </tr>
         <% end %>
       </tbody>
