@@ -111,4 +111,21 @@ RSpec.describe WelcomeHomePresenter do
     end
   end
 
+  describe "#contribution_factor" do
+    it "should return 0 when not initialized" do
+      presenter = WelcomeHomePresenter.new
+
+      result = presenter.contribution_factor
+
+      expect(result).to eq 0
+    end
+
+    it "should return the initilized contribution factor" do
+      presenter = WelcomeHomePresenter.new contribution_factor: ContributionFactor.new(factor: 1)
+
+      result = presenter.contribution_factor
+      
+      expect(result).to eq 1
+    end
+  end
 end
