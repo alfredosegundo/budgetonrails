@@ -1,84 +1,77 @@
 <p>
-	<%= form_for :dashboard, url: {action: "change_date"} do |f| %>
-		Ir para 
-		<%= date_select "dashboard", "budget_date", default: @budget_date, order: [:month, :year] %>
-		<input class="button tiny" name="commit" type="submit" value="Go!">
-	<% end %>
+  <%= form_for :dashboard, url: {action: "change_date"} do |f| %>
+    Ir para 
+    <%= date_select "dashboard", "budget_date", default: @budget_date, order: [:month, :year] %>
+    <input class="button tiny" name="commit" type="submit" value="Go!">
+  <% end %>
 </p>
 <p>
-	Budget in <%= @presenter.budget_date  %>
+  Budget in <%= @presenter.budget_date  %>
 </p>
 <p>
-	<ul>
-		<li>
-			Saldo: <%= @balance %>
-		</li>
-		<li>
-			Contribution factor: <%= @contribution_factor * 100 %>%
-		</li>
-	</ul>
+  <ul>
+    <li>
+      Saldo: <%= @balance %>
+    </li>
+    <li>
+      Contribution factor: <%= @contribution_factor * 100 %>%
+    </li>
+  </ul>
 </p>
 
 <ul class="small-block-grid-2">
-	<li>
-		<table>
-		  <thead>
-		    <tr>
-		      <th colspan="2">Saídas</th>
-		    </tr>
-		    <tr>
-			  <th>Descrição</th>
-		      <th>Valor (R$)</th>
-		    </tr>
-		  </thead>
-		  <tfoot>
-		    <tr>
-		      <td>Total</td>
-		      <td><%= @presenter.total_expenses %></td>
-		    </tr>
-		  </tfoot>
-		  <tbody>
-		  	<% @presenter.expenses.each do |e| %>
-			    <tr>
-			      <td><%= e.description %></td>
-			      <td><%= e.value %></td>
-			    </tr>
-		  	<% end %>
-		  </tbody>
-		</table>
-	</li>
-	<li>
-		<table>
-		  <thead>
-		    <tr>
-		      <th colspan="2">Contribuições</th>
-		    </tr>
-		    <tr>
-			  <th>Descrição</th>
-		      <th>Valor</th>
-		    </tr>
-		  </thead>
-		  <tfoot>
-		    <tr>
-		      <td>Total</td>
-		      <td><%= @total_contributions %></td>
-		    </tr>
-		  </tfoot>
-		  <tbody>
-		  	<% if @contributions.blank? %>
-		  		<tr>
-		  			<td>empty</td>
-		  			<td>empty</td>
-		  		</tr>
-		  	<% else %>
-			  	<% @contributions.each do |c| %>
-				    <tr>
-				      <td><%= c.contributor.firstName %></td>
-				      <td>R$ <%= c.amount * @contribution_factor %> (<%= c.amount %>)</td>
-				    </tr>
-			  	<% end %>
-		  	<% end %>
-		  </tbody>
-		</table>
-	</li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">Saídas</th>
+        </tr>
+        <tr>
+        <th>Descrição</th>
+          <th>Valor (R$)</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td><%= @presenter.total_expenses %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @presenter.expenses.each do |e| %>
+          <tr>
+            <td><%= e.description %></td>
+            <td><%= e.value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">Contribuições</th>
+        </tr>
+        <tr>
+        <th>Descrição</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td><%= @total_contributions %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @presenter.contributions.each do |c| %>
+          <tr>
+            <td><%= c.contributor.firstName %></td>
+            <td>R$ <%= c.amount * @contribution_factor %> (<%= c.amount %>)</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </li>
 </ul>

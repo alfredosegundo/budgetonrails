@@ -10,14 +10,18 @@ class WelcomeHomePresenter
 		@contribution_factor = contribution_factor
 	end
 
+	def contributions
+		@contributions
+	end
+	
 	def total_expenses
 		Maths.sum(expenses, :value)
 	end
 
 	def expenses
-		return @periodic_expenses + @expenses if @periodic_expenses && @expenses && !@periodic_expenses.empty? && !@expenses.empty?
-		return @periodic_expenses if @periodic_expenses && !@periodic_expenses.empty?
-		return @expenses if @expenses && !@expenses.empty?
+		return @periodic_expenses + @expenses if @periodic_expenses and @expenses and not @periodic_expenses.empty? and not @expenses.empty?
+		return @periodic_expenses if @periodic_expenses and not @periodic_expenses.empty?
+		return @expenses if @expenses and not @expenses.empty?
 		[]
 	end
 
