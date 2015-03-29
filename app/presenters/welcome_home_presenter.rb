@@ -10,6 +10,11 @@ class WelcomeHomePresenter
     @contribution_factor = contribution_factor
   end
 
+  def total_contributions
+    return Maths.sum_multiplied_by(@contributions, :amount, contribution_factor_multiplier)
+    0
+  end
+
   def contribution_factor_multiplier
     return self.contribution_factor / 100
   end

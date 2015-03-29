@@ -28,8 +28,7 @@ class WelcomeController < ApplicationController
         expenses: expenses, periodic_expenses: periodic_expenses, 
         contributions: contributions, contribution_factor: contribution_factor
 
-      @total_contributions = contributions.map(&:amount).inject(0) { |sum, val| sum + val * @presenter.contribution_factor_multiplier}
-      @balance = @total_contributions - @presenter.total_expenses if @presenter.contribution_factor_multiplier
+      @balance = @presenter.total_contributions - @presenter.total_expenses if @presenter.contribution_factor_multiplier
     end
 
     def home_params

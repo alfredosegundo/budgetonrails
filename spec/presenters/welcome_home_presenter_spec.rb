@@ -154,4 +154,23 @@ RSpec.describe WelcomeHomePresenter do
       expect(result).to eq 0.99
     end
   end
+
+  describe "#total_contributions" do
+    it "should be 0 when contributions are empty" do
+      presenter = WelcomeHomePresenter.new
+
+      result = presenter.total_contributions
+
+      expect(result).to eq 0
+    end
+
+    it "should sum all contributions and apply contribution_factor_multiplier" do
+      presenter = WelcomeHomePresenter.new(contributions: [Contribution.new(amount: 100)],
+        contribution_factor: ContributionFactor.new(factor: 50))
+
+      result = presenter.total_contributions
+
+      expect(result).to eq 50
+    end
+  end
 end
