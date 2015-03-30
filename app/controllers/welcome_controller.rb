@@ -20,15 +20,11 @@ class WelcomeController < ApplicationController
   private
 
     def load_values(budget_date)
-      expenses = Expense.get_expenses_same_month_of budget_date
-      periodic_expenses = PeriodicExpense.get_expenses_for_month budget_date
-      contributions = Contribution.get_contributions_for_month budget_date
-      contribution_factor = ContributionFactor.find_for_month budget_date
       @presenter = WelcomeHomePresenter.new budget_date: budget_date,
         expenses: Expense.get_expenses_same_month_of(budget_date),
-        periodic_expenses: periodic_expenses,
-        contributions: contributions,
-        contribution_factor: contribution_factor
+        periodic_expenses: PeriodicExpense.get_expenses_for_month(budget_date),
+        contributions: Contribution.get_contributions_for_month(budget_date),
+        contribution_factor: ContributionFactor.find_for_month(budget_date)
     end
 
     def home_params
