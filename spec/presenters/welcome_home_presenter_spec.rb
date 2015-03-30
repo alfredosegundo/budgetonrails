@@ -173,4 +173,23 @@ RSpec.describe WelcomeHomePresenter do
       expect(result).to eq 50
     end
   end
+
+  describe "#balance" do
+    it "should be 0 when empty contributions and empty expenses" do
+      presenter = WelcomeHomePresenter.new
+
+      result = presenter.balance
+
+      expect(result).to eq 0
+    end
+
+    it "should be the difference between total_contributions and total_expenses" do
+      presenter = WelcomeHomePresenter.new(contributions: [Contribution.new(amount: 2)],
+        expenses: [Expense.new(value: 1)], contribution_factor: ContributionFactor.new(factor: 100))
+
+      result = presenter.balance
+
+      expect(result).to eq 1
+    end
+  end
 end

@@ -10,6 +10,10 @@ class WelcomeHomePresenter
     @contribution_factor = contribution_factor
   end
 
+  def balance
+    return total_contributions - total_expenses
+  end
+
   def total_contributions
     return Maths.sum_multiplied_by(@contributions, :amount, contribution_factor_multiplier)
   end

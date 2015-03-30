@@ -11,7 +11,7 @@
 <p>
   <ul>
     <li>
-      Saldo: <%= @balance %>
+      Saldo: <%= @presenter.balance %>
     </li>
     <li>
       Contribution factor: <%= @presenter.contribution_factor %>%
@@ -61,7 +61,7 @@
       <tfoot>
         <tr>
           <td>Total</td>
-          <td><%= @total_contributions %></td>
+          <td><%= @presenter.total_contributions %></td>
         </tr>
       </tfoot>
       <tbody>
