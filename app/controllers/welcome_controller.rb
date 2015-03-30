@@ -25,10 +25,10 @@ class WelcomeController < ApplicationController
       contributions = Contribution.get_contributions_for_month budget_date
       contribution_factor = ContributionFactor.find_for_month budget_date
       @presenter = WelcomeHomePresenter.new budget_date: budget_date,
-        expenses: expenses, periodic_expenses: periodic_expenses, 
-        contributions: contributions, contribution_factor: contribution_factor
-
-      @balance = @presenter.total_contributions - @presenter.total_expenses if @presenter.contribution_factor_multiplier
+        expenses: Expense.get_expenses_same_month_of(budget_date),
+        periodic_expenses: periodic_expenses,
+        contributions: contributions,
+        contribution_factor: contribution_factor
     end
 
     def home_params

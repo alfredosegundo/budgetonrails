@@ -1,11 +1,11 @@
 require 'rails_helper.rb'
 
 RSpec.describe WelcomeHomePresenter do
-  describe "#budget_date" do
+  describe "#formated_budget_date" do
     it "should return empty string for invalid date" do
       presenter = WelcomeHomePresenter.new(budget_date: nil)
 
-      budget_date = presenter.budget_date
+      budget_date = presenter.formated_budget_date
 
       expect(budget_date).to eq("")
     end
@@ -13,7 +13,7 @@ RSpec.describe WelcomeHomePresenter do
     it "should return month and year for a date" do
       presenter = WelcomeHomePresenter.new(budget_date: DateTime.new(2015,1,1))
 
-      budget_date = presenter.budget_date
+      budget_date = presenter.formated_budget_date
 
       expect(budget_date).to eq("January 2015")
     end
