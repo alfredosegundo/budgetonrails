@@ -2,7 +2,8 @@ class WelcomeController < ApplicationController
   skip_before_action :require_login, only: [:index]
     
   def index
-    render layout: 'before_login'
+    render layout: 'before_login' if not logged_in?
+    redirect_to action: 'home' if logged_in?
   end
 
   def home
