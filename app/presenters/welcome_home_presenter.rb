@@ -18,7 +18,7 @@ class WelcomeHomePresenter
   end
 
   def total_contributions
-    Maths.sum_multiplied_by(@contributions, :amount, contribution_factor_multiplier)
+    Maths.sum_multiplied_by @contributions, :amount, contribution_factor_multiplier
   end
 
   def contribution_factor_multiplier
@@ -35,7 +35,7 @@ class WelcomeHomePresenter
   end
   
   def total_expenses
-    Maths.sum(expenses, :value)
+    Maths.sum expenses, :value
   end
 
   def expenses
@@ -50,12 +50,12 @@ class WelcomeHomePresenter
   end
 
   def formated_budget_date
-    return @budget_date.strftime("%B %Y") if @budget_date
+    return @budget_date.strftime "%B %Y" if @budget_date
     ""
   end
 
   private
-    def exist?(*expenses)
+    def exist? *expenses
       expenses.all? {|e| e and not e.empty?}
     end
 end
