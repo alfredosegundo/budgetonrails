@@ -21,5 +21,6 @@ Rails.application.routes.draw do
 
   resources :expenses
   resources :periodic_expenses
+  resources :expected_expenses
   resources :contribution_factors
 end

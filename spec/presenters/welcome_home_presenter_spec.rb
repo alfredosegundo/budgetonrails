@@ -1,6 +1,7 @@
 require 'rails_helper.rb'
 
 RSpec.describe WelcomeHomePresenter do
+
   describe "#formated_budget_date" do
     it "should return empty string for invalid date" do
       presenter = WelcomeHomePresenter.new(budget_date: nil)
@@ -20,47 +21,54 @@ RSpec.describe WelcomeHomePresenter do
   end
 
   describe "#expenses" do
-    it "should return an array with EmptyExpense if no expenses provided" do
-      presenter = WelcomeHomePresenter.new(expenses: [])
+
+    it "should return an empty array if no expenses provided" do
+      presenter = WelcomeHomePresenter.new
 
       expenses = presenter.expenses
 
+      expect(expenses).to be_instance_of(Array)
       expect(expenses.size).to eq(0)
     end
 
-    it "should return a expense if provided" do
+    it "should return an array of expenses only if expenses provided" do
       presenter = WelcomeHomePresenter.new(expenses: [Expense.new])
 
       expenses = presenter.expenses
 
       expect(expenses.size).to eq(1)
+      expect(expenses.first).to be_instance_of(Expense)
     end
 
-    it "should return expenses and periodic_expenses" do
+    it "should return a merged array of expenses and periodic_expenses when both provied" do
       presenter = WelcomeHomePresenter.new(expenses: [Expense.new], periodic_expenses: [PeriodicExpense.new])
 
       expenses = presenter.expenses
 
       expect(expenses.size).to eq(2)
+      expect(expenses.first).to be_instance_of(PeriodicExpense)
+      expect(expenses.last).to be_instance_of(Expense)
     end
 
-    it "should return expenses if periodic_expenses are nil" do
-      presenter = WelcomeHomePresenter.new(expenses: [Expense.new])
+    it "should return an array of expenses if periodic_expenses are nil" do
+      presenter = WelcomeHomePresenter.new(expenses: [Expense.new], periodic_expenses: nil)
 
       expenses = presenter.expenses
 
       expect(expenses.size).to eq(1)
+      expect(expenses.first).to be_instance_of(Expense)
     end
 
-    it "should return periodic_expenses if expenses are nil" do
-      presenter = WelcomeHomePresenter.new(periodic_expenses: [PeriodicExpense.new])
+    it "should return an array of periodic_expenses if expenses are nil" do
+      presenter = WelcomeHomePresenter.new(expenses: nil, periodic_expenses: [PeriodicExpense.new])
 
       expenses = presenter.expenses
 
       expect(expenses.size).to eq(1)
+      expect(expenses.first).to be_instance_of(PeriodicExpense)
     end
 
-    it "should return an array with EmptyExpense if both periodic_expenses and expenses are nil" do
+    it "should return an empty array if both periodic_expenses and expenses are nil" do
       presenter = WelcomeHomePresenter.new(expenses: nil, periodic_expenses: nil)
 
       expenses = presenter.expenses
@@ -68,12 +76,51 @@ RSpec.describe WelcomeHomePresenter do
       expect(expenses.size).to eq(0)
     end
 
-    it "should return an array with EmptyExpense if both periodic_expenses and expenses are empty" do
-      presenter = WelcomeHomePresenter.new(expenses: [], periodic_expenses: [])
+    it "should return an empty array if expected_expenses, periodic_expenses and expenses are empty" do
+      presenter = WelcomeHomePresenter.new(expenses: [], periodic_expenses: [], expected_expenses: [])
 
       expenses = presenter.expenses
 
       expect(expenses.size).to eq(0)
+    end
+
+    it "should return an array of expected_expenses only if expected_expenses provided" do
+      presenter = WelcomeHomePresenter.new(expected_expenses: [ExpectedExpense.new])
+
+      expenses = presenter.expenses
+
+      expect(expenses.size).to eq(1)
+      expect(expenses.first).to be_instance_of(ExpectedExpense)
+    end
+
+    it "should return an merged array of expected_expenses and periodic_expenses when both provided" do
+      presenter = WelcomeHomePresenter.new(expected_expenses: [ExpectedExpense.new], periodic_expenses: [PeriodicExpense.new])
+
+      expenses = presenter.expenses
+
+      expect(expenses.size).to eq(2)
+      expect(expenses.first).to be_instance_of(ExpectedExpense)
+      expect(expenses.last).to be_instance_of(PeriodicExpense)
+    end
+
+    it "should return an merged array of expected_expenses and expenses when both provided" do
+      presenter = WelcomeHomePresenter.new(expected_expenses: [ExpectedExpense.new], expenses: [Expense.new])
+
+      expenses = presenter.expenses
+
+      expect(expenses.size).to eq(2)
+      expect(expenses.first).to be_instance_of(ExpectedExpense)
+      expect(expenses.last).to be_instance_of(Expense)
+    end
+    it "should return an merged array of expected_expenses, periodic_expenses and expenses when provided" do
+      presenter = WelcomeHomePresenter.new(expected_expenses: [ExpectedExpense.new], periodic_expenses: [PeriodicExpense.new], expenses: [Expense.new])
+
+      expenses = presenter.expenses
+
+      expect(expenses.size).to eq(3)
+      expect(expenses.first).to be_instance_of(ExpectedExpense)
+      expect(expenses.second).to be_instance_of(PeriodicExpense)
+      expect(expenses.last).to be_instance_of(Expense)
     end
   end
 

@@ -4,10 +4,11 @@ class WelcomeHomePresenter
 
   attr_reader :budget_date
 
-  def initialize(budget_date: nil, expenses: [], periodic_expenses: [], contributions: [], contribution_factor: {})
+  def initialize budget_date: nil, expenses: [], periodic_expenses: [], expected_expenses: [], contributions: [], contribution_factor: {}
     @budget_date = budget_date
     @expenses = expenses
     @periodic_expenses = periodic_expenses
+    @expected_expenses = expected_expenses
     @contributions = contributions
     @contribution_factor = contribution_factor
   end
@@ -38,9 +39,13 @@ class WelcomeHomePresenter
   end
 
   def expenses
-    return @periodic_expenses + @expenses if @periodic_expenses and @expenses and not @periodic_expenses.empty? and not @expenses.empty?
-    return @periodic_expenses if @periodic_expenses and not @periodic_expenses.empty?
-    return @expenses if @expenses and not @expenses.empty?
+    return @expected_expenses + @periodic_expenses + @expenses if exist? @expected_expenses, @periodic_expenses, @expenses
+    return @expected_expenses + @expenses if exist? @expenses, @expected_expenses
+    return @expected_expenses + @periodic_expenses if exist? @periodic_expenses, @expected_expenses
+    return @periodic_expenses + @expenses if exist? @periodic_expenses, @expenses
+    return @periodic_expenses if exist? @periodic_expenses
+    return @expected_expenses if exist? @expected_expenses
+    return @expenses if exist? @expenses
     []
   end
 
@@ -49,4 +54,8 @@ class WelcomeHomePresenter
     ""
   end
 
+  private
+    def exist?(*expenses)
+      expenses.all? {|e| e and not e.empty?}
+    end
 end

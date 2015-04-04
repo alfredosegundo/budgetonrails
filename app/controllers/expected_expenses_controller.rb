@@ -1,0 +1,2 @@
+class ExpectedExpensesController < ApplicationController
+end
