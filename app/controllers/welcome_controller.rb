@@ -24,6 +24,7 @@ class WelcomeController < ApplicationController
       @presenter = WelcomeHomePresenter.new budget_date: budget_date,
         expenses: Expense.get_expenses_same_month_of(budget_date),
         periodic_expenses: PeriodicExpense.get_expenses_for_month(budget_date),
+        expected_expenses: ExpectedExpense.not_realized_on(budget_date),
         contributions: Contribution.get_contributions_for_month(budget_date),
         contribution_factor: ContributionFactor.find_for_month(budget_date)
     end

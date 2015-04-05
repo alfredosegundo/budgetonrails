@@ -4,7 +4,12 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    @expense = Expense.new() unless @expense
+    if ExpectedExpense.exists? params[:id]
+      ee = ExpectedExpense.find params[:id]
+      @expense = Expense.new(expected_expense: ee) unless @expense
+    else 
+      @expense = Expense.new() unless @expense
+    end
     @contributors = [["empty", 0]]
     Contributor.all.each do |c|
       @contributors.push([c.firstName, c.id])
@@ -60,8 +65,8 @@ class ExpensesController < ApplicationController
   end
 
   private
-  def expense_params
-    params.require(:expense).permit(:description, :value, :budget_date)
-  end
+    def expense_params
+      params.require(:expense).permit(:description, :value, :budget_date)
+    end
 
 end
