@@ -1,8 +1,8 @@
 class Expense < ActiveRecord::Base
   belongs_to :contributor
   before_save :set_buget_date_to_midnight
-  has_many :realizations
-  has_many :expected_expenses, through: :realizations
+  has_one :realization
+  has_one :expected_expense, through: :realization
 
   def self.get_expenses_same_month_of(date)
     first_day_month = date.beginning_of_month
