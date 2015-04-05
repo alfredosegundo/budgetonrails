@@ -28,4 +28,6 @@ RSpec.describe ExpectedExpense, :type => :model do
       expect(result.size).to eq 0
     end
   end
+
+  
 end

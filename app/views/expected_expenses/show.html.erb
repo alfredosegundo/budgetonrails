@@ -1,0 +1,14 @@
+<p>
+  <h3>Expected Expense</h3>
+</p>
+
+<p>
+  Description: <%= @expense.description %>
+</p>
+
+<p>
+  Value: <%= @expense.value %>
+</p>
+
+<%= link_to 'Back', expected_expenses_path, class: "button tiny" %> |
+<%= link_to 'Edit', edit_expected_expense_path(@expense), class: "button tiny" %>
