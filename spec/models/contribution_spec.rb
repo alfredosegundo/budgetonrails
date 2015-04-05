@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Contribution, :type => :model do
-	before do
-		Expense.delete_all
-		Contribution.delete_all
-		Contributor.delete_all
-	end
-
 	it "should exist only one in a month for same contributor" do
 		contributor = CreateContributor()
 		contributor.save
