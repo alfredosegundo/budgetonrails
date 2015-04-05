@@ -31,21 +31,23 @@ class WelcomeHomePresenter
   end
 
   def contributions
-    @contributions
+    return @contributions if @contributions
+    []
   end
   
   def total_expenses
-    Maths.sum expenses, :value
+    (Maths.sum expenses, :value) + (Maths.sum expected_expenses, :value)
   end
 
   def expenses
-    return @expected_expenses + @periodic_expenses + @expenses if exist? @expected_expenses, @periodic_expenses, @expenses
-    return @expected_expenses + @expenses if exist? @expenses, @expected_expenses
-    return @expected_expenses + @periodic_expenses if exist? @periodic_expenses, @expected_expenses
     return @periodic_expenses + @expenses if exist? @periodic_expenses, @expenses
     return @periodic_expenses if exist? @periodic_expenses
-    return @expected_expenses if exist? @expected_expenses
     return @expenses if exist? @expenses
+    []
+  end
+
+  def expected_expenses
+    return @expected_expenses if exist? @expected_expenses
     []
   end
 

@@ -9,22 +9,21 @@ class WelcomeController < ApplicationController
   def home
     now = DateTime.now
     budget_date = DateTime.new now.year, now.month, now.day, 0,0,0,"+00:00"
-    load_values budget_date
+    load_values_for budget_date
   end
 
   def change_date
     budget_date = Date.new home_params["budget_date(1i)"].to_i, home_params["budget_date(2i)"].to_i, home_params["budget_date(3i)"].to_i
-    load_values budget_date.to_datetime
+    load_values_for budget_date.to_datetime
     render 'home'
   end
 
   private
 
-    def load_values budget_date
+    def load_values_for budget_date
       @presenter = WelcomeHomePresenter.new budget_date: budget_date,
         expenses: Expense.get_expenses_same_month_of(budget_date),
         periodic_expenses: PeriodicExpense.get_expenses_for_month(budget_date),
-        expected_expenses: ExpectedExpense.all,
         contributions: Contribution.get_contributions_for_month(budget_date),
         contribution_factor: ContributionFactor.find_for_month(budget_date)
     end

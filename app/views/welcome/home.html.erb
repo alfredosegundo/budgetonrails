@@ -43,6 +43,12 @@
         </tr>
       </tfoot>
       <tbody>
+        <% @presenter.expected_expenses.each do |e| %>
+          <tr>
+            <td><%= e.description %></td>
+            <td><%= e.value %> <%= link_to "realize", new_expense_path(id: e.id) %></td>
+          </tr>
+        <% end %>
         <% @presenter.expenses.each do |e| %>
           <tr>
             <td><%= e.description %></td>
