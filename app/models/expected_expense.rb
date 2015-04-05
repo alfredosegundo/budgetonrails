@@ -1,4 +1,5 @@
 class ExpectedExpense < ActiveRecord::Base
+  validates :description, :value, presence: true
   has_many :realizations
   has_many :expenses, through: :realizations
 

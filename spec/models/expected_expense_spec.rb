@@ -1,6 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe ExpectedExpense, :type => :model do  
+RSpec.describe ExpectedExpense, :type => :model do
+  context "entity validation" do
+    it "should not save wihtout description" do
+      ExpectedExpense.new.save
+
+      result = ExpectedExpense.all
+
+      expect(result.size).to eq 0
+    end
+
+    it "should not save without a value" do
+      ExpectedExpense.new(description: "some").save
+
+      result = ExpectedExpense.all
+
+      expect(result.size).to eq 0
+    end
+  end
+
   context "#not_realized_on" do
     budget_date = DateTime.new(2014,9,1)
 
