@@ -5,9 +5,9 @@ class ExpensesController < ApplicationController
 
   def new
     if ExpectedExpense.exists? params[:id]
-      ee = ExpectedExpense.find params[:id]
-      @expense = Expense.new(expected_expense: ee) unless @expense
-    else 
+      @expected_expense = ExpectedExpense.find params[:id]
+      @expense = Expense.new() unless @expense
+    else
       @expense = Expense.new() unless @expense
     end
     @contributors = [["empty", 0]]
@@ -17,21 +17,19 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    if Contributor.exists?(params[:contributor_id])
-      @contributor = Contributor.find(params[:contributor_id])
-      @contributor.expenses.create(expense_params)
-      if @contributor.save
-        redirect_to contributor_path(@contributor)
-      else
-        render 'new'
+    @expense = Expense.new expense_params
+    if @expense.save
+      if ExpectedExpense.exists? expected_expense_params[:id]
+        ee = ExpectedExpense.find expected_expense_params[:id]
+        ee.expenses << @expense
       end
+      if params[:contributor_id] != 0 and Contributor.exists?(params[:contributor_id])
+        @contributor = Contributor.find(params[:contributor_id])
+        @contributor.expenses << @expense
+      end
+      redirect_to expense_path(@expense)
     else
-      @expense = Expense.new(expense_params)
-      if @expense.save
-        redirect_to expense_path(@expense)
-      else
-        render 'new'
-      end
+      render 'new'
     end
   end
 
@@ -67,6 +65,10 @@ class ExpensesController < ApplicationController
   private
     def expense_params
       params.require(:expense).permit(:description, :value, :budget_date)
+    end
+
+    def expected_expense_params
+      params.require(:expected_expense).permit(:id)
     end
 
 end

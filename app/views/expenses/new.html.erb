@@ -11,6 +11,17 @@
       </ul>
     </div>
   <% end %>
+  <% if @expected_expense %>
+    <div class="row">
+      <div class="small-3 columns">
+        Realizando despesa planejada:
+      </div>
+      <div class="small-5 columns end">
+        <%= @expected_expense.description %> R$<%= @expected_expense.value %>
+        <%= hidden_field(:expected_expense, :id) %>
+      </div>
+    </div>
+  <% end %>
   <div class="row">
     <div class="small-2 columns">
       <%= f.label :description, class: "right inline" %>

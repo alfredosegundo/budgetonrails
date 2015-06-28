@@ -33,7 +33,7 @@ RSpec.describe ExpectedExpense, :type => :model do
 
       result = ExpectedExpense.not_realized_on budget_date
 
-      expect(result.to_a.size).to eq 1
+      expect(result.size).to eq 1
     end
 
     it "should return only not realized expenses" do
@@ -45,7 +45,30 @@ RSpec.describe ExpectedExpense, :type => :model do
 
       expect(result.size).to eq 0
     end
+
+    it "should avoid duplications" do
+      ExpectedExpense.new(description: "some", value: 20).save
+
+      ee = ExpectedExpense.new(description: "some", value: 10)
+      ee.save
+      ee.expenses << Expense.new(value: 10, description: "some", budget_date: budget_date)
+      ee.expenses << Expense.new(value: 10, description: "some", budget_date: 2.months.ago)
+
+      result = ExpectedExpense.not_realized_on budget_date
+
+      expect(result.size).to eq 1
+    end
+
+    it "should show for a not realized month" do
+      ee = ExpectedExpense.new(description: "some", value: 10)
+      ee.save
+      ee.expenses << Expense.new(value: 10, description: "some", budget_date: budget_date)
+
+      result = ExpectedExpense.not_realized_on 2.months.ago
+
+      expect(result.size).to eq 1
+    end
   end
 
-  
+
 end

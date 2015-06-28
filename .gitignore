@@ -23,3 +23,11 @@ bower_components
 
 # ignore gems
 /vendor/bundle
+
+# ctags
+.tags
+.tags_sorted_by_file
+
+# sublime text
+*.sublime-project
+*.sublime-workspace

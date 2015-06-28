@@ -1,11 +1,13 @@
 class ExpectedExpense < ActiveRecord::Base
   validates :description, :value, presence: true
-  has_many :realizations
-  has_many :expenses, through: :realizations
+  has_many :expenses
 
   def self.not_realized_on date
     initial_date = date.beginning_of_month
     final_date = date.end_of_month
-    ExpectedExpense.where("NOT expenses.budget_date between ? AND ? OR expenses IS NULL", initial_date, final_date).eager_load(:expenses)
+    in_this_month = ExpectedExpense.includes(:expenses)
+                    .where(expenses: {budget_date: initial_date..final_date})
+                    .to_a.map { |ee| ee.id }
+    ExpectedExpense.where.not(id: in_this_month)
   end
 end
