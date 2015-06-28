@@ -31,6 +31,22 @@
     </div>
   </div>
   <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :initial_date, "Start date", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "expense", "initial_date", order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :final_date, "End date", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "expense", "final_date", order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' } %>
+    </div>
+  </div>
+  <div class="row">
       <%= f.submit "Save", class: "button tiny right" %>
   </div>
 <% end %>

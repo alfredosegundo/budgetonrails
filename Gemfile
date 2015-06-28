@@ -46,7 +46,7 @@ gem 'zurb-foundation'
 
 # Heroku solution to serve static assets
 gem 'rails_serve_static_assets', group: :production
-gem 'rails_stdout_logging', group: :production
+gem 'rails_stdout_logging'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'

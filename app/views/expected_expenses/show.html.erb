@@ -10,5 +10,13 @@
   Value: <%= @expense.value %>
 </p>
 
+<p>
+  Initial date: <%= @expense.initial_date %>
+</p>
+
+<p>
+  Final date: <%= @expense.final_date %>
+</p>
+
 <%= link_to 'Back', expected_expenses_path, class: "button tiny" %> |
 <%= link_to 'Edit', edit_expected_expense_path(@expense), class: "button tiny" %>
