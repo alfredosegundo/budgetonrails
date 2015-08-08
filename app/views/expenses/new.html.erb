@@ -46,7 +46,7 @@
       <%= f.label :budget_date, "Budget", class: "right inline" %>
     </div>
     <div class="small-3 columns end">
-      <%= date_select "expense", "budget_date", order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' } %>
+      <%= date_select "expense", "budget_date", order: [:month, :year], default: DateTime.now %>
     </div>
   </div>
   <% if @contributors.any? %>
