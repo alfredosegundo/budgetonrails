@@ -67,13 +67,14 @@
       </section>
     </nav>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: name %>
-    <% end %>
-
-    <div class="row">
-      <div class="small-11 small-centered columns">
-        <%= yield %>
+    <div class="panel">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: name %>
+      <% end %>
+      <div class="row">
+        <div class="large-11 large-centered columns">
+          <%= yield %>
+        </div>
       </div>
     </div>
     

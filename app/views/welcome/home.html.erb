@@ -2,27 +2,23 @@
   Bem vindo!
 <% end %>
 
-<p>
-  <%= form_for :dashboard, id: "chage_date", url: {action: "change_date"} do |f| %>
-    Ir para 
-    <%= date_select "dashboard", "budget_date", default: @presenter.budget_date, order: [:month, :year] %>
-    <input class="button tiny" name="commit" type="submit" value="Go!">
-    <input class="button tiny" name="commit" type="submit" value="Today" formmethod="get">
-  <% end %>
-</p>
+<%= form_for :dashboard, id: "chage_date", url: {action: "change_date"} do |f| %>
+  Ir para 
+  <%= date_select "dashboard", "budget_date", default: @presenter.budget_date, order: [:month, :year] %>
+  <input class="button tiny" name="commit" type="submit" value="Go!">
+  <input class="button tiny" name="commit" type="submit" value="Today" formmethod="get">
+<% end %>
 <p>
   Budget in <%= @presenter.formated_budget_date  %>
 </p>
-<p>
-  <ul>
-    <li>
-      Saldo: <%= @presenter.balance %>
-    </li>
-    <li>
-      Contribution factor: <%= @presenter.contribution_factor %>%
-    </li>
-  </ul>
-</p>
+<ul>
+  <li>
+    Saldo: <%= @presenter.balance %>
+  </li>
+  <li>
+    Contribution factor: <%= @presenter.contribution_factor %>%
+  </li>
+</ul>
 
 <div class="row">
   <div class="large-4 columns">
