@@ -210,9 +210,12 @@ RSpec.describe WelcomeHomePresenter do
       expect(result).to eq 0
     end
 
-    it "should be the difference between total_contributions and total_expenses" do
-      presenter = WelcomeHomePresenter.new(contributions: [Contribution.new(amount: 2)],
-        expenses: [Expense.new(value: 1)], contribution_factor: ContributionFactor.new(factor: 100))
+    it "should be the difference between contributions plus revenue and expenses" do
+      presenter = WelcomeHomePresenter.new(
+        contributions: [Contribution.new(amount: 1)],
+        expenses: [Expense.new(value: 1)],
+        revenues: [Revenue.new(amount: 1)],
+        contribution_factor: ContributionFactor.new(factor: 100))
 
       result = presenter.balance
 

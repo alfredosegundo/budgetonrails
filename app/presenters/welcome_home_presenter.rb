@@ -4,8 +4,10 @@ class WelcomeHomePresenter
 
   attr_reader :budget_date
 
-  def initialize budget_date: nil, expenses: [], periodic_expenses: [], expected_expenses: [], contributions: [], contribution_factor: {}
+  def initialize budget_date: nil, revenues: [], expenses: [], periodic_expenses: [], 
+    expected_expenses: [], contributions: [], contribution_factor: {}
     @budget_date = budget_date
+    @revenues = revenues
     @expenses = expenses
     @periodic_expenses = periodic_expenses
     @expected_expenses = expected_expenses
@@ -14,7 +16,7 @@ class WelcomeHomePresenter
   end
 
   def balance
-    return total_contributions - total_expenses
+    return (total_contributions + total_revenues) - total_expenses
   end
 
   def total_contributions
@@ -59,5 +61,9 @@ class WelcomeHomePresenter
   private
     def exist? *expenses
       expenses.all? {|e| e and not e.empty?}
+    end
+
+    def total_revenues
+      Maths.sum @revenues, :amount
     end
 end

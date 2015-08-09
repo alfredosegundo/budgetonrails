@@ -22,6 +22,7 @@ class WelcomeController < ApplicationController
 
     def load_values_for budget_date
       @presenter = WelcomeHomePresenter.new budget_date: budget_date,
+        revenues: Revenue.get_for_month(budget_date),
         expenses: Expense.get_expenses_same_month_of(budget_date),
         periodic_expenses: PeriodicExpense.get_expenses_for_month(budget_date),
         expected_expenses: ExpectedExpense.not_realized_on(budget_date),
