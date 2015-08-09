@@ -19,6 +19,7 @@ class ContributorsController < ApplicationController
 
 	def show
 		@contributor = Contributor.find(params[:id])
+		@contribution = Contribution.new unless @contribution
 	end
 
 	def edit
