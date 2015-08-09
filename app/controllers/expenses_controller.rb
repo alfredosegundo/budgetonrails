@@ -19,7 +19,7 @@ class ExpensesController < ApplicationController
   def create
     @expense = Expense.new expense_params
     if @expense.save
-      if ExpectedExpense.exists? expected_expense_params[:id]
+      if params[:id] and ExpectedExpense.exists? expected_expense_params[:id]
         ee = ExpectedExpense.find expected_expense_params[:id]
         ee.expenses << @expense
       end
