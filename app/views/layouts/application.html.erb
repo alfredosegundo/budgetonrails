@@ -42,14 +42,14 @@
             <li>
               <%= link_to image_tag("#{user_image}"), {:id => current_user.id ,:action => 'show', :controller => 'contributors'} %>
             </li>
-            <li><%= link_to "Log out", log_out_path %></li>
+            <li><%= link_to "Sair", log_out_path %></li>
           <% else %>
-            <li><%= link_to 'Login','/auth/google_oauth2' %></li>
+            <li><%= link_to 'Entrar','/auth/google_oauth2' %></li>
           <% end %>
         </ul>
 
         <ul class="left">
-          <li class="has-dropdown"><%= link_to "Expenses", expenses_path %>
+          <li class="has-dropdown"><%= link_to "Despesas", expenses_path %>
             <ul class="dropdown">
               <li><label>escolha o tipo</label></li>
               <li><%= link_to "Única", expenses_path %></li>
@@ -57,7 +57,8 @@
               <li><%= link_to "Planejada", expected_expenses_path %></li>
             </ul>
           </li>
-          <li><%= link_to "Contribution Factors", contribution_factors_path %></li>
+          <li><%= link_to "Fator de contribuição", contribution_factors_path %></li>
+          <li><%= link_to "Receitas", revenues_path %></li>
         </ul>
       </section>
     </nav>

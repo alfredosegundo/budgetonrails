@@ -1,0 +1,45 @@
+<h3>Nova receita</h3>
+<%= form_for :revenue, url: revenues_path do |f| %>
+  <% if @revenue.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@revenue.errors.count, "error") %> ao salvar:</h4>
+      <ul>
+      <% @revenue.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :description, class: "right inline" %>
+    </div>
+    <div class="small-5 columns end">
+      <%= f.text_area :description %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :amount, class: "right inline" %>
+    </div>
+    <div class="small-1 columns">
+      <%= f.label :amount, "R$", class: "prefix" %>
+    </div>
+    <div class="small-4 columns end">
+      <%= f.text_field :amount %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :budget_date, "Orçamento", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "revenue", "budget_date", order: [:month, :year], default: DateTime.now %>
+    </div>
+  </div>
+  <div class="row">
+      <%= f.submit "Save", class: "button tiny right" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', revenues_path %>

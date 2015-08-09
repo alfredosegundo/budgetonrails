@@ -1,0 +1,18 @@
+<p>
+  <h3>Receita</h3>
+</p>
+
+<p>
+  Descrição: <%= @revenue.description %>
+</p>
+
+<p>
+  Orçamento: <%= @revenue.formated_budget_date %>
+</p>
+
+<p>
+  Valor: <%= @revenue.amount %>
+</p>
+
+<%= link_to 'Back', revenues_path, class: "button tiny" %> |
+<%= link_to 'Edit', edit_revenue_path(@revenue), class: "button tiny" %>

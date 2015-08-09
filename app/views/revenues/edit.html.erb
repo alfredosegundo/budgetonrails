@@ -1,0 +1,45 @@
+<%= form_for :revenue, url: revenue_path(@revenue), method: :patch do |f| %>
+  <% if @revenue.errors.any? %>
+  <div id="error_explanation">
+    <h4><%= pluralize(@revenue.errors.count, "error") %> ao salvar:</h4>
+    <ul>
+    <% @revenue.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :description, class: "right inline" %>
+    </div>
+    <div class="small-5 columns end">
+      <%= f.text_area :description %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :amount, class: "right inline" %>
+    </div>
+    <div class="small-1 columns">
+      <%= f.label :amount, "R$", class: "prefix" %>
+    </div>
+    <div class="small-4 columns end">
+      <%= f.text_field :amount %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :budget_date, "budget date", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= date_select "revenue", "budget_date", order: [:month, :year] %>
+    </div>
+  </div>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', revenue_path %>
