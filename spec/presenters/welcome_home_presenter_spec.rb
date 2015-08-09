@@ -241,4 +241,41 @@ RSpec.describe WelcomeHomePresenter do
       expect(result.size).to eq 1
     end
   end
+
+  describe "#total_revenues" do
+    it "should return zero when there is no revenues" do
+      presenter = WelcomeHomePresenter.new revenues: []
+
+      result = presenter.total_revenues
+
+      expect(result).to eq 0
+    end
+
+    it "should return the sum of revenues it has" do
+      presenter = WelcomeHomePresenter.new revenues: [Revenue.new(amount:1)]
+
+      result = presenter.total_revenues
+
+      expect(result).to eq 1
+    end
+  end
+
+  describe "#revenues" do
+    it "should return empty array if revenues are nil" do
+      presenter = WelcomeHomePresenter.new revenues: nil
+
+      result = presenter.revenues
+
+      expect(result).to be_instance_of(Array)
+      expect(result.size).to eq 0
+    end
+
+    it "should return all revenues" do
+      presenter = WelcomeHomePresenter.new revenues: [Revenue.new]
+
+      result = presenter.revenues
+
+      expect(result.size).to eq 1
+    end
+  end
 end

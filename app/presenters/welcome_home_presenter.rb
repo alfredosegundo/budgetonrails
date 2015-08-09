@@ -58,12 +58,17 @@ class WelcomeHomePresenter
     ""
   end
 
+  def revenues
+    return @revenues if exist? @revenues
+    []
+  end
+
+  def total_revenues
+    Maths.sum @revenues, :amount
+  end
+
   private
     def exist? *expenses
       expenses.all? {|e| e and not e.empty?}
-    end
-
-    def total_revenues
-      Maths.sum @revenues, :amount
     end
 end

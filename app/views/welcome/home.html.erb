@@ -24,7 +24,7 @@
   </ul>
 </p>
 
-<ul class="small-block-grid-2">
+<ul class="small-block-grid-3">
   <li>
     <table>
       <thead>
@@ -80,6 +80,33 @@
           <tr>
             <td><%= c.contributor.firstName %></td>
             <td>R$ <%= c.amount * @presenter.contribution_factor_multiplier %> (<%= c.amount %>)</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">Receitas</th>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td><%= @presenter.total_revenues %></td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @presenter.revenues.each do |r| %>
+          <tr>
+            <td><%= r.description %></td>
+            <td>R$ <%= r.amount %></td>
           </tr>
         <% end %>
       </tbody>
