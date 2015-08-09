@@ -2,6 +2,10 @@ class Revenue < ActiveRecord::Base
 	validates :amount, numericality: { greater_than: 0 }
 	validates :description, presence: true
 
+  def truncated_description
+    self.description[0..20]
+  end
+
 	def self.get_for_month date
     first_day_month = date.beginning_of_month
     last_day_month = date.end_of_month

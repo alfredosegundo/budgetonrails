@@ -3,6 +3,10 @@ class PeriodicExpense < ActiveRecord::Base
 	validates :value, numericality: { greater_than: 0 }
 	before_save :set_dates_to_edges_of_month
 
+  def truncated_description
+    self.description[0..20]
+  end
+
 	def self.get_expenses_for_month(date)
 		PeriodicExpense.where("start_date <= ?", date).where("end_date >= ?", date)
 	end

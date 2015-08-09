@@ -41,13 +41,13 @@
       <tbody>
         <% @presenter.expected_expenses.each do |e| %>
           <tr>
-            <td><%= e.description %></td>
+            <td><%= link_to e.truncated_description, expected_expense_path(e) %></td>
             <td><%= e.value %> <%= link_to "realize", new_expense_path(id: e.id) %></td>
           </tr>
         <% end %>
         <% @presenter.expenses.each do |e| %>
           <tr>
-            <td><%= e.description %></td>
+            <td><%= link_to e.truncated_description, expense_path(e) %></td>
             <td><%= e.value %></td>
           </tr>
         <% end %>
@@ -101,7 +101,7 @@
       <tbody>
         <% @presenter.revenues.each do |r| %>
           <tr>
-            <td><%= r.description %></td>
+            <td><%= r.truncated_description %></td>
             <td>R$ <%= r.amount %></td>
           </tr>
         <% end %>

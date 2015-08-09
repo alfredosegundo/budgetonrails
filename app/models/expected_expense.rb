@@ -3,6 +3,10 @@ class ExpectedExpense < ActiveRecord::Base
   before_save :adjust_dates
   has_many :expenses
 
+  def truncated_description
+    self.description[0..20]
+  end
+
   def adjust_dates
     self.initial_date = self.initial_date.beginning_of_month
     self.final_date = self.final_date.end_of_month

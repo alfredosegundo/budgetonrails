@@ -1,8 +1,14 @@
+require "description_formater"
+
 class Expense < ActiveRecord::Base
   validates :description, :budget_date, :value, presence: true
   belongs_to :contributor
   before_save :set_buget_date_to_midnight
   belongs_to :expected_expense
+
+  def truncated_description
+    DescriptionFormater.truncate(description)
+  end
 
   def self.get_expenses_same_month_of date
     first_day_month = date.beginning_of_month
