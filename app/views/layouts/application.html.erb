@@ -57,8 +57,12 @@
               <li><%= link_to "Planejada", expected_expenses_path %></li>
             </ul>
           </li>
+          <li class="has-dropdown"><%= link_to "Receitas", revenues_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Nova", new_revenue_path %></li>
+            </ul>
+          </li>
           <li><%= link_to "Fator de contribuição", contribution_factors_path %></li>
-          <li><%= link_to "Receitas", revenues_path %></li>
         </ul>
       </section>
     </nav>
