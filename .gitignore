@@ -24,6 +24,9 @@ bower_components
 # ignore gems
 /vendor/bundle
 
+# ignore bower
+vendor/assets/components/
+
 # ctags
 .tags
 .tags_sorted_by_file

@@ -22,5 +22,7 @@ module Budgetonrails
     config.autoload_paths += %W(
         #{config.root}/app/presenters
     )
+
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
   end
 end
