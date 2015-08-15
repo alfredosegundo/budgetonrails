@@ -1,0 +1,17 @@
+{
+  "name": "budgetonrails",
+  "version": "0.0.0",
+  "homepage": "https://budgetonrails.herokuapp.com",
+  "authors": [
+    "Alfredo Segundo <alfredocavalcanti@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ]
+}
