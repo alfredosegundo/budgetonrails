@@ -1,0 +1,19 @@
+<h1>Categorias</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Cor</th>
+    <th colspan="3"></th>
+  </tr>
+ 
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= color_field_tag "color", category.color %></td>
+      <td><%= link_to 'Show', category_path(category) %></td>
+      <td><%= link_to 'Edit', category_path(category) %></td>
+      <td><%= link_to 'Destroy', category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

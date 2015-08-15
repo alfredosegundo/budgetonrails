@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  get 'revenues/index'
-
-  get 'revenues/new'
-
-  get 'revenues/edit'
-
-  get 'revenues/show'
-
   get 'welcome/index'
   get "/auth/google_oauth2/callback" => "sessions#create"
   get "log_out" => "sessions#destroy", :as => "log_out"
@@ -25,4 +17,5 @@ Rails.application.routes.draw do
   resources :expected_expenses
   resources :contribution_factors
   resources :revenues
+  resources :categories
 end
