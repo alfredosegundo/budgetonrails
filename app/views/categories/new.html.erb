@@ -1,2 +1,34 @@
-<h1>Categories#new</h1>
-<p>Find me in app/views/categories/new.html.erb</p>
+<h3>Nova categoria</h3>
+<%= form_for :category, url: categories_path do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> ao salvar:</h2>
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :name, class: "right inline" %>
+    </div>
+    <div class="small-5 columns end">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= f.label :color, "Cor", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= f.color_field :color %>
+    </div>
+  </div>
+  <div class="row">
+      <%= f.submit "Save", class: "button tiny right" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', categories_path %>

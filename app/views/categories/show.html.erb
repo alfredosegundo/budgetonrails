@@ -1,2 +1,14 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<p>
+  <h3>Categoria</h3>
+</p>
+
+<p>
+  Nome: <%= @category.name %>
+</p>
+
+<p>
+  Cor: <%= color_field_tag "color", @category.color, { disabled: "disabled" } %>
+</p>
+
+<%= link_to 'Back', categories_path, class: "button tiny" %> |
+<%= link_to 'Edit', edit_category_path(@category), class: "button tiny" %>
