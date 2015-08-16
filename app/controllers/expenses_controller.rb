@@ -1,6 +1,6 @@
 class ExpensesController < ApplicationController
   def index
-    @expenses = Expense.all
+    @expenses = Expense.all.order(:created_at)
   end
 
   def new
@@ -10,10 +10,8 @@ class ExpensesController < ApplicationController
     else
       @expense = Expense.new() unless @expense
     end
-    @contributors = [["empty", 0]]
-    Contributor.all.each do |c|
-      @contributors.push([c.firstName, c.id])
-    end
+    @contributors = Contributor.all.order(:firstName)
+    @categories = Category.all.order(:created_at)
   end
 
   def create
@@ -22,10 +20,6 @@ class ExpensesController < ApplicationController
       if params[:id] and ExpectedExpense.exists? expected_expense_params[:id]
         ee = ExpectedExpense.find expected_expense_params[:id]
         ee.expenses << @expense
-      end
-      if params[:contributor_id] != 0 and Contributor.exists?(params[:contributor_id])
-        @contributor = Contributor.find(params[:contributor_id])
-        @contributor.expenses << @expense
       end
       redirect_to expense_path(@expense)
     else
@@ -39,11 +33,8 @@ class ExpensesController < ApplicationController
 
   def edit
     @expense = Expense.find(params[:id])
-    @contributors = [["-- choose a contributor --",0]]
-    Contributor.all.map do |c|
-      @contributors.push([c.firstName, c.id])
-    end
-    @selected_contributor = if @expense.contributor then @expense.contributor.id else 0 end
+    @contributors = Contributor.all.order(:firstName)
+    @categories = Category.all.order(:created_at)
   end
 
   def update
@@ -64,7 +55,7 @@ class ExpensesController < ApplicationController
 
   private
     def expense_params
-      params.require(:expense).permit(:description, :value, :budget_date)
+      params.require(:expense).permit(:description, :value, :budget_date, :category_id, :contributor_id)
     end
 
     def expected_expense_params

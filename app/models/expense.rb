@@ -5,6 +5,7 @@ class Expense < ActiveRecord::Base
   belongs_to :contributor
   before_save :set_buget_date_to_midnight
   belongs_to :expected_expense
+  belongs_to :category
 
   def truncated_description
     DescriptionFormater.truncate(description)

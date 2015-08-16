@@ -31,6 +31,14 @@
   </div>
   <div class="row">
     <div class="small-2 columns">
+      <%= f.label :category, "Categoria", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= f.select(:category_id, options_from_collection_for_select(@categories, "id", "name", @expense.category_id), include_blank: true) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
       <%= f.label :budget_date, "Budget", class: "right inline" %>
     </div>
     <div class="small-3 columns end">
@@ -42,7 +50,9 @@
       <div class="small-2 columns">
         <%= f.label :contributor_id, "Contributor", class: "right inline" %>
       </div>
-      <%= select_tag(:contributor_id, options_for_select(@contributors, @selected_contributor), class: "small-3 columns end") %>
+      <div class="small-3 columns end">
+        <%= f.select(:contributor_id, options_from_collection_for_select(@contributors, "id", "firstName", @expense.contributor_id), include_blank: true) %>
+      </div>
     </div>
   <% end %>
  
