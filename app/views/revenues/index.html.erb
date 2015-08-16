@@ -8,6 +8,7 @@
   <tr>
     <th>Descrição</th>
     <th>Valor</th>
+    <th>Categoria</th>
     <th>Orçamento</th>
     <th colspan="3"></th>
   </tr>
@@ -21,6 +22,11 @@
         <% end %>
       </td>
       <td><%= revenue.amount %></td>
+      <td>
+        <% if revenue.category %>
+          <%= link_to revenue.category.name, category_path(revenue.category) %>
+        <% end %>
+      </td>
       <td><%= revenue.formated_budget_date %></td>
       <td><%= link_to 'Show', revenue_path(revenue) %></td>
       <td><%= link_to 'Edit', edit_revenue_path(revenue) %></td>

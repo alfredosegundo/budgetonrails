@@ -1,6 +1,7 @@
 class Revenue < ActiveRecord::Base
 	validates :amount, numericality: { greater_than: 0 }
 	validates :description, presence: true
+  belongs_to :category
 
   def truncated_description
     self.description[0..20]

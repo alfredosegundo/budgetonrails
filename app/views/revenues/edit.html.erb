@@ -30,6 +30,14 @@
   </div>
   <div class="row">
     <div class="small-2 columns">
+      <%= f.label :category, "Categoria", class: "right inline" %>
+    </div>
+    <div class="small-3 columns end">
+      <%= f.select(:category_id, options_from_collection_for_select(@categories, "id", "name", @revenue.category_id), include_blank: true) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
       <%= f.label :budget_date, "budget date", class: "right inline" %>
     </div>
     <div class="small-3 columns end">

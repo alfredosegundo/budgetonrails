@@ -1,10 +1,11 @@
 class RevenuesController < ApplicationController
   def index
-  	@revenues = Revenue.all
+  	@revenues = Revenue.all.order(:created_at)
   end
 
   def new
   	@revenue = Revenue.new
+    @categories = Category.all.order(:created_at)
   end
 
   def create
@@ -18,6 +19,7 @@ class RevenuesController < ApplicationController
 
   def edit
     @revenue = Revenue.find(params[:id])
+    @categories = Category.all.order(:created_at)
   end
 
   def update
@@ -42,6 +44,6 @@ class RevenuesController < ApplicationController
 
   private
     def revenue_params
-      params.require(:revenue).permit(:description, :amount, :budget_date)
+      params.require(:revenue).permit(:description, :amount, :budget_date, :category_id)
     end
 end
