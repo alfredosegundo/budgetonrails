@@ -22,9 +22,9 @@
           <%= link_to "realize", new_expense_path(expected_expense_id: expense.id) %>
         </td>
         <td><%= expense.value %></td>
-        <td><%= link_to 'Show', expense_path(expense) %></td>
-        <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
-        <td><%= link_to 'Destroy', expense_path(expense), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', expected_expense_path(expense) %></td>
+        <td><%= link_to 'Edit', edit_expected_expense_path(expense) %></td>
+        <td><%= link_to 'Destroy', expected_expense_path(expense), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>
@@ -53,9 +53,9 @@
           <% end %>
         </td>
         <td><%= expense.value %></td>
-        <td><%= link_to 'Show', expense_path(expense) %></td>
-        <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
-        <td><%= link_to 'Destroy', expense_path(expense), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', periodic_expense_path(expense) %></td>
+        <td><%= link_to 'Edit', edit_periodic_expense_path(expense) %></td>
+        <td><%= link_to 'Destroy', periodic_expense_path(expense), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>
