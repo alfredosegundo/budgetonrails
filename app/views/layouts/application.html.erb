@@ -78,11 +78,7 @@
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, class: name %>
       <% end %>
-      <div class="row">
-        <div class="large-11 large-centered columns">
-          <%= yield %>
-        </div>
-      </div>
+      <%= yield %>
     </div>
     
     <%= javascript_include_tag "application" %>

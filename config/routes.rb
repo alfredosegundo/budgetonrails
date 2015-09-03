@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'welcome/home' => 'welcome#home', :as => 'home'
 
   post 'welcome/home' => 'welcome#change_date'
+  get 'budget/expenses' => 'expenses#budget', :as => 'budget_expenses'
+  get 'budget/revenues' => 'revenues#budget', :as => 'budget_revenues'
 
   resources :contributors do
   	resources :contributions
@@ -18,4 +20,5 @@ Rails.application.routes.draw do
   resources :contribution_factors
   resources :revenues
   resources :categories
+  resources :contributions
 end

@@ -18,7 +18,7 @@
       </div>
       <div class="small-5 columns end">
         <%= @expected_expense.description %> R$<%= @expected_expense.value %>
-        <%= hidden_field(:expected_expense, :id) %>
+        <%= hidden_field(:expense, :expected_expense_id, :value => @expected_expense.id) %>
       </div>
     </div>
   <% end %>

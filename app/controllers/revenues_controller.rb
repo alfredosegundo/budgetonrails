@@ -1,6 +1,12 @@
 class RevenuesController < ApplicationController
+  def budget
+    budget_date = DateTime.parse(params[:budget_date] || DateTime.now.utc.to_s)
+  	@revenues = Revenue.get_for_month(budget_date).order(:created_at)
+    render 'index'
+  end
+
   def index
-  	@revenues = Revenue.all.order(:created_at)
+    @revenues = Revenue.all.order(:budget_date).reverse_order
   end
 
   def new

@@ -2,110 +2,50 @@
   Bem vindo!
 <% end %>
 
-<%= form_for :dashboard, id: "chage_date", url: {action: "change_date"} do |f| %>
-  Ir para 
-  <%= date_select "dashboard", "budget_date", default: @presenter.budget_date, order: [:month, :year] %>
-  <input class="button tiny" name="commit" type="submit" value="Go!">
-  <input class="button tiny" name="commit" type="submit" value="Today" formmethod="get">
-<% end %>
-<p>
-  Budget in <%= @presenter.formated_budget_date  %>
-</p>
-<ul>
-  <li>
-    Saldo: <%= @presenter.balance %>
-  </li>
-  <li>
-    Contribution factor: <%= @presenter.contribution_factor %>%
-  </li>
-</ul>
-
 <div class="row">
   <div class="large-4 columns">
+    <%= form_for :dashboard, id: "chage_date", url: {action: "change_date"} do |f| %>
+      <div class="row">
+        <div class="small-6 columns">
+            <%= date_select "dashboard", "budget_date", default: @presenter.budget_date, order: [:month, :year] %>
+        </div>
+        <div class="small-4 columns">
+          <input class="button" name="commit" type="submit" value="Go!">
+          <input class="button" name="commit" type="submit" value="Today" formmethod="get">
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="large-3 small-6 columns">
     <table>
       <thead>
         <tr>
-          <th colspan="2">Saídas</th>
-        </tr>
-        <tr>
-        <th>Descrição</th>
-          <th>Valor (R$)</th>
+          <th colspan="2"><%= @presenter.formated_budget_date  %></th>
         </tr>
       </thead>
       <tfoot>
         <tr>
-          <td>Total</td>
-          <td><%= @presenter.total_expenses %></td>
+          <td>Saldo</td>
+          <td><%= @presenter.balance %></td>
         </tr>
       </tfoot>
       <tbody>
-        <% @presenter.expected_expenses.each do |e| %>
-          <tr>
-            <td><%= link_to e.truncated_description, expected_expense_path(e) %></td>
-            <td><%= e.value %> <%= link_to "realize", new_expense_path(id: e.id) %></td>
-          </tr>
-        <% end %>
-        <% @presenter.expenses.each do |e| %>
-          <tr>
-            <td><%= link_to e.truncated_description, expense_path(e) %></td>
-            <td><%= e.value %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="large-4 columns">
-    <table>
-      <thead>
         <tr>
-          <th colspan="2">Contribuições</th>
-        </tr>
-        <tr>
-        <th>Descrição</th>
-          <th>Valor</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <td>Total</td>
+          <td><%= link_to 'Contribuições', contributions_path(budget_date: @presenter.budget_date), method: :get %></td>
           <td><%= @presenter.total_contributions %></td>
         </tr>
-      </tfoot>
-      <tbody>
-        <% @presenter.contributions.each do |c| %>
-          <tr>
-            <td><%= c.contributor.firstName %></td>
-            <td>R$ <%= c.amount * @presenter.contribution_factor_multiplier %> (<%= c.amount %>)</td>
-          </tr>
-        <% end %>
+        <tr>
+          <td><%= link_to 'Receitas', budget_revenues_path(budget_date: @presenter.budget_date), method: :get %></td>
+          <td><%= @presenter.total_revenues %></td>
+        </tr>
+        <tr>
+          <td><%= link_to 'Despesas', budget_expenses_path(budget_date: @presenter.budget_date), method: :get %></td>
+          <td><%= @presenter.total_expenses %></td>
+        </tr>
       </tbody>
     </table>
   </div>
-  <div class="large-4 columns">
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2">Receitas</th>
-        </tr>
-        <tr>
-          <th>Descrição</th>
-          <th>Valor</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <td>Total</td>
-          <td><%= @presenter.total_revenues %></td>
-        </tr>
-      </tfoot>
-      <tbody>
-        <% @presenter.revenues.each do |r| %>
-          <tr>
-            <td><%= r.truncated_description %></td>
-            <td>R$ <%= r.amount %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="large-3 small-4 columns end">
+    
   </div>
 </div>

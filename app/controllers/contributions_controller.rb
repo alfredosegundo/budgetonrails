@@ -1,5 +1,10 @@
 class ContributionsController < ApplicationController
 
+	def index
+		budget_date = DateTime.parse(params[:budget_date] || DateTime.now.utc.to_s)
+		@contributions = Contribution.get_contributions_for_month(budget_date)
+	end
+	
 	def create
 		@contributor = Contributor.find(params[:contributor_id])
     @contribution = @contributor.contributions.create(strong_params)
@@ -29,7 +34,7 @@ class ContributionsController < ApplicationController
 	end
 
 	private
-	    def strong_params
+    def strong_params
 			params.require(:contribution).permit(:amount, :budget_date)
-	    end
+    end
 end

@@ -5,7 +5,7 @@ class Contribution < ActiveRecord::Base
 
   def self.get_contributions_for_month(date)
     last_month_day = date.utc.end_of_month
-    Contribution.select("DISTINCT ON (contributor_id) amount as amount, contributor_id as contributor_id")
+    Contribution.select("DISTINCT ON (contributor_id) amount as amount, contributor_id as contributor_id, budget_date as budget_date, id as id")
                 .where(["budget_date <= ?", last_month_day])
                 .order(contributor_id: :asc, budget_date: :desc).to_a
   end
