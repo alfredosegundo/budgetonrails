@@ -18,7 +18,7 @@ class WelcomeHomePresenter
   def category
     categories = Hash.new(0)
     @expenses.each do |expense|
-      categories[expense.category.name] += expense.value
+      categories[expense.category.name] += expense.value if expense.category
     end
     categories
   end
@@ -26,7 +26,7 @@ class WelcomeHomePresenter
   def colors
     colors = Set.new
     @expenses.each do |expense|
-      colors.add(expense.category.color)
+      colors.add(expense.category.color) if expense.category
     end
     colors
   end
