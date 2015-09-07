@@ -19,10 +19,10 @@
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   </head>
 
   <body>
-
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
         <li class="name">
@@ -73,7 +73,6 @@
         </ul>
       </section>
     </nav>
-
     <div class="panel">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, class: name %>

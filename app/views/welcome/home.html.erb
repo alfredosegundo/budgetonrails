@@ -45,7 +45,29 @@
       </tbody>
     </table>
   </div>
-  <div class="large-3 small-4 columns end">
-    
+  <div class="large-5 small-4 columns end">
+    <div id="chart_div"></div>
   </div>
 </div>
+<script type="text/javascript">
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Categoria');
+  data.addColumn('number', 'Soma');
+  data.addRows([
+    <% @presenter.category.each_key do |key| %>
+      ['<%= key %>', <%= @presenter.category[key] %>],
+    <% end %>
+  ]);
+
+  var options = {'title':'Despesas por categoria',colors: [
+    <% @presenter.colors.each do | color |%>
+      '<%= color %>',
+    <% end %>
+  ]};
+
+  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+</script>

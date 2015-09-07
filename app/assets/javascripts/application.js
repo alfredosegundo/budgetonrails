@@ -18,3 +18,5 @@
 $(document).ready(function() {
 	$(document).foundation();
 });
+
+google.load('visualization', '1.0', {'packages':['corechart']});

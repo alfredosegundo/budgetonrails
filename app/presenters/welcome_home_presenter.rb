@@ -15,6 +15,22 @@ class WelcomeHomePresenter
     @contribution_factor = contribution_factor
   end
 
+  def category
+    categories = Hash.new(0)
+    @expenses.each do |expense|
+      categories[expense.category.name] += expense.value
+    end
+    categories
+  end
+
+  def colors
+    colors = []
+    @expenses.each do |expense|
+      colors.push(expense.category.color)
+    end
+    colors
+  end
+
   def balance
     return (total_contributions + total_revenues) - total_expenses
   end
