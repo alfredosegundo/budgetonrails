@@ -24,9 +24,9 @@ class WelcomeHomePresenter
   end
 
   def colors
-    colors = []
+    colors = Set.new
     @expenses.each do |expense|
-      colors.push(expense.category.color)
+      colors.add(expense.category.color)
     end
     colors
   end
