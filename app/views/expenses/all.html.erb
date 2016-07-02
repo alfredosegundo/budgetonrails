@@ -46,6 +46,11 @@
         <td>
           <%= expense.description %>
         </td>
+        <td>
+          <% if expense.category %>
+              <%= link_to expense.category.name, category_path(expense.category) %>
+          <% end %>
+        </td>
         <td><%= expense.value %></td>
         <td><%= link_to 'Show', periodic_expense_path(expense) %></td>
         <td><%= link_to 'Edit', edit_periodic_expense_path(expense) %></td>
