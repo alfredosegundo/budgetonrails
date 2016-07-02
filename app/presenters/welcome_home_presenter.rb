@@ -2,7 +2,7 @@ require 'maths'
 
 class WelcomeHomePresenter
 
-  attr_reader :budget_date
+  attr_reader :budget_date, :periodic_expenses, :expected_expenses, :expenses, :revenues
 
   def initialize(budget_date: nil, revenues: [], expenses: [], periodic_expenses: [],
                  expected_expenses: [], contributions: [], contribution_factor: {})
@@ -17,15 +17,19 @@ class WelcomeHomePresenter
 
   def categories
     categories = Hash.new(0)
-    @expenses.concat(@periodic_expenses).each do |expense|
+    expenses_with_category.each do |expense|
       categories[expense.category.name] += expense.value if expense.category
     end
     categories
   end
 
+  def all_expenses
+    @expenses + @periodic_expenses + @expected_expenses
+  end
+
   def colors
     colors = Set.new
-    @expenses.each do |expense|
+    expenses_with_category.each do |expense|
       colors.add(expense.category.color) if expense.category
     end
     colors
@@ -54,29 +58,12 @@ class WelcomeHomePresenter
   end
   
   def total_expenses
-    (Maths.sum expenses, :value) + (Maths.sum expected_expenses, :value)
-  end
-
-  def expenses
-    return @periodic_expenses + @expenses if exist? @periodic_expenses, @expenses
-    return @periodic_expenses if exist? @periodic_expenses
-    return @expenses if exist? @expenses
-    []
-  end
-
-  def expected_expenses
-    return @expected_expenses if exist? @expected_expenses
-    []
+    (Maths.sum all_expenses, :value)
   end
 
   def formated_budget_date
     return @budget_date.strftime "%B %Y" if @budget_date
     ''
-  end
-
-  def revenues
-    return @revenues if exist? @revenues
-    []
   end
 
   def total_revenues
@@ -86,5 +73,9 @@ class WelcomeHomePresenter
   private
     def exist? *expenses
       expenses.all? {|e| e and not e.empty?}
+    end
+
+    def expenses_with_category
+      (@expenses + @periodic_expenses)
     end
 end

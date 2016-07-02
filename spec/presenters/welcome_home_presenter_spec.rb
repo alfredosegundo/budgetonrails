@@ -20,82 +20,6 @@ RSpec.describe WelcomeHomePresenter do
     end
   end
 
-  describe "#expected_expenses" do
-    it "should return an empty array if expected_expenses are nil" do
-      presenter = WelcomeHomePresenter.new(expected_expenses: nil)
-
-      expenses = presenter.expected_expenses
-
-      expect(expenses.size).to eq(0)
-    end
-
-    it "should return an array of expected_expenses only if expected_expenses provided" do
-      presenter = WelcomeHomePresenter.new(expected_expenses: [ExpectedExpense.new])
-
-      expenses = presenter.expected_expenses
-
-      expect(expenses.size).to eq(1)
-      expect(expenses.first).to be_instance_of(ExpectedExpense)
-    end
-  end
-
-  describe "#expenses" do
-
-    it "should return an empty array if no expenses provided" do
-      presenter = WelcomeHomePresenter.new
-
-      expenses = presenter.expenses
-
-      expect(expenses).to be_instance_of(Array)
-      expect(expenses.size).to eq(0)
-    end
-
-    it "should return an array of expenses only if expenses provided" do
-      presenter = WelcomeHomePresenter.new(expenses: [Expense.new])
-
-      expenses = presenter.expenses
-
-      expect(expenses.size).to eq(1)
-      expect(expenses.first).to be_instance_of(Expense)
-    end
-
-    it "should return a merged array of expenses and periodic_expenses when both provied" do
-      presenter = WelcomeHomePresenter.new(expenses: [Expense.new], periodic_expenses: [PeriodicExpense.new])
-
-      expenses = presenter.expenses
-
-      expect(expenses.size).to eq(2)
-      expect(expenses.first).to be_instance_of(PeriodicExpense)
-      expect(expenses.last).to be_instance_of(Expense)
-    end
-
-    it "should return an array of expenses if periodic_expenses are nil" do
-      presenter = WelcomeHomePresenter.new(expenses: [Expense.new], periodic_expenses: nil)
-
-      expenses = presenter.expenses
-
-      expect(expenses.size).to eq(1)
-      expect(expenses.first).to be_instance_of(Expense)
-    end
-
-    it "should return an array of periodic_expenses if expenses are nil" do
-      presenter = WelcomeHomePresenter.new(expenses: nil, periodic_expenses: [PeriodicExpense.new])
-
-      expenses = presenter.expenses
-
-      expect(expenses.size).to eq(1)
-      expect(expenses.first).to be_instance_of(PeriodicExpense)
-    end
-
-    it "should return an empty array if both periodic_expenses and expenses are nil" do
-      presenter = WelcomeHomePresenter.new(expenses: nil, periodic_expenses: nil)
-
-      expenses = presenter.expenses
-
-      expect(expenses.size).to eq(0)
-    end
-  end
-
   describe "#total_expenses" do
     it "should return 0 when expenses are empty" do
       presenter = WelcomeHomePresenter.new(expenses: [], periodic_expenses: [])
@@ -260,25 +184,6 @@ RSpec.describe WelcomeHomePresenter do
     end
   end
 
-  describe "#revenues" do
-    it "should return empty array if revenues are nil" do
-      presenter = WelcomeHomePresenter.new revenues: nil
-
-      result = presenter.revenues
-
-      expect(result).to be_instance_of(Array)
-      expect(result.size).to eq 0
-    end
-
-    it "should return all revenues" do
-      presenter = WelcomeHomePresenter.new revenues: [Revenue.new]
-
-      result = presenter.revenues
-
-      expect(result.size).to eq 1
-    end
-  end
-
   describe '#categories' do
     it 'should list categories from expenses' do
       any_category = Category.new(name: 'cat', color: 'any')
@@ -298,6 +203,20 @@ RSpec.describe WelcomeHomePresenter do
       categories = presenter.categories
 
       expect(categories['cat']).to eq 1
+    end
+
+    it 'should sum expenses and periodic expenses categories' do
+      any_category = Category.new(name: 'cat', color: 'any')
+      another_category = Category.new(name: 'cat2', color: 'any')
+      p_expense_with_category = PeriodicExpense.new(description: 'any', value: 1.0, category: any_category)
+      p_expense_with_category2 = PeriodicExpense.new(description: 'any', value: 1.0, category: any_category)
+      expense_with_category = Expense.new(description: 'any', value: 10.0, category: another_category)
+      presenter = WelcomeHomePresenter.new periodic_expenses: [p_expense_with_category, p_expense_with_category2], expenses: [expense_with_category]
+
+      categories = presenter.categories
+
+      expect(categories['cat']).to eq 2
+      expect(categories['cat2']).to eq 10
     end
   end
 
