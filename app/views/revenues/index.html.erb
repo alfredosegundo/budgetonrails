@@ -16,10 +16,7 @@
   <% @revenues.each do |revenue| %>
     <tr>
       <td>
-        <%= revenue.description[0..14] %>
-        <% if revenue.description.length > 15 %>
-          ...
-        <% end %>
+        <%= revenue.description %>
       </td>
       <td><%= revenue.amount %></td>
       <td>

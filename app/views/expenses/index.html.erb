@@ -20,10 +20,7 @@
         <% end %>
       </td>
       <td>
-        <%= expense.description[0..14] %>
-        <% if expense.description.length > 15 %>
-          ...
-        <% end %>
+        <%= expense.description %>
       </td>
       <td>
         <% if expense.category %>
