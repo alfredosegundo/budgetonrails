@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Description</th>
+    <th>Categoria</th>
     <th>Value</th>
     <th>Start date</th>
     <th>End date</th>
@@ -12,9 +13,11 @@
   <% @expenses.each do |expense| %>
     <tr>
       <td>
-        <%= expense.description[0..14] %>
-        <% if expense.description.length > 15 %>
-          ...
+        <%= expense.description %>
+      </td>
+      <td>
+        <% if expense.category %>
+            <%= link_to expense.category.name, category_path(expense.category) %>
         <% end %>
       </td>
       <td><%= expense.value %></td>

@@ -5,6 +5,7 @@ class PeriodicExpensesController < ApplicationController
 
   def new
     @expense = PeriodicExpense.new() unless @expense
+    @categories = Category.all.order(:created_at)
   end
 
   def create
@@ -22,6 +23,7 @@ class PeriodicExpensesController < ApplicationController
 
   def edit
     @expense = PeriodicExpense.find(params[:id])
+    @categories = Category.all.order(:created_at)
   end
 
   def update
@@ -42,6 +44,6 @@ class PeriodicExpensesController < ApplicationController
 
   private
   def expense_params
-    params.require(:expense).permit(:description, :value, :start_date, :end_date)
+    params.require(:expense).permit(:description, :value, :start_date, :end_date, :category_id)
   end
 end

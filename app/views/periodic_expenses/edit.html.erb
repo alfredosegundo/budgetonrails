@@ -1,54 +1,71 @@
 <%= form_for :expense, url: periodic_expense_path(@expense), method: :patch do |f| %>
-  <% if @expense.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@expense.errors.count, "error") %> prohibited
-      this expense from being saved:</h2>
-    <ul>
-    <% @expense.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
-  <div class="row">
-    <div class="small-2 columns">
-      <%= f.label :description, class: "right inline" %>
+      
+    <% if @expense.errors.any? %>
+          
+        <div id="error_explanation">
+              <h2><%= pluralize(@expense.errors.count, "error") %> prohibited
+                this expense from being saved:</h2>
+              
+          <ul>
+                
+            <% @expense.errors.full_messages.each do |msg| %>
+                      
+                <li><%= msg %></li>
+                    
+            <% end %>
+                
+          </ul>
+            
+        </div>
+          
+    <% end %>
+    <div class="row">
+      <div class="small-2 columns">
+        <%= f.label :description, class: "right inline" %>
+      </div>
+      <div class="small-5 columns end">
+        <%= f.text_area :description %>
+      </div>
     </div>
-    <div class="small-5 columns end">
-      <%= f.text_area :description %>
+    <div class="row">
+      <div class="small-2 columns">
+        <%= f.label :value, class: "right inline" %>
+      </div>
+      <div class="small-1 columns">
+        <%= f.label :value, "R$", class: "prefix" %>
+      </div>
+      <div class="small-4 columns end">
+        <%= f.text_field :value %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
-      <%= f.label :value, class: "right inline" %>
+    <div class="row">
+      <div class="small-2 columns">
+        <%= f.label :category, "Categoria", class: "right inline" %>
+      </div>
+      <div class="small-3 columns end">
+        <%= f.select(:category_id, options_from_collection_for_select(@categories, "id", "name", @expense.category_id), include_blank: true) %>
+      </div>
     </div>
-    <div class="small-1 columns">
-      <%= f.label :value, "R$", class: "prefix" %>
+    <div class="row">
+      <div class="small-2 columns">
+        <%= f.label :start_date, "Start date", class: "right inline" %>
+      </div>
+      <div class="small-3 columns end">
+        <%= date_select "expense", "start_date", order: [:month, :year] %>
+      </div>
     </div>
-    <div class="small-4 columns end">
-      <%= f.text_field :value %>
+    <div class="row">
+      <div class="small-2 columns">
+        <%= f.label :end_date, "End date", class: "right inline" %>
+      </div>
+      <div class="small-3 columns end">
+        <%= date_select "expense", "end_date", order: [:month, :year] %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
-      <%= f.label :start_date, "Start date", class: "right inline" %>
-    </div>
-    <div class="small-3 columns end">
-      <%= date_select "expense", "start_date", order: [:month, :year] %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
-      <%= f.label :end_date, "End date", class: "right inline" %>
-    </div>
-    <div class="small-3 columns end">
-      <%= date_select "expense", "end_date", order: [:month, :year] %>
-    </div>
-  </div>
- 
-  <p>
-    <%= f.submit %>
-  </p>
+     
+      <p>
+      <%= f.submit %>
+    </p>
 <% end %>
  
 <%= link_to 'Back', periodic_expense_path %>

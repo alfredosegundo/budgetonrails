@@ -278,4 +278,27 @@ RSpec.describe WelcomeHomePresenter do
       expect(result.size).to eq 1
     end
   end
+
+  describe '#categories' do
+    it 'should list categories from expenses' do
+      any_category = Category.new(name: 'cat', color: 'any')
+      expense_with_category = Expense.new(description: 'any', value: 1.0, budget_date: DateTime.now, category: any_category)
+      presenter = WelcomeHomePresenter.new expenses: [expense_with_category]
+
+      categories = presenter.categories
+
+      expect(categories['cat']).to eq 1
+    end
+
+    it 'should also list categories from periodic expenses' do
+      any_category = Category.new(name: 'cat', color: 'any')
+      expense_with_category = PeriodicExpense.new(description: 'any', value: 1.0, category: any_category)
+      presenter = WelcomeHomePresenter.new periodic_expenses: [expense_with_category]
+
+      categories = presenter.categories
+
+      expect(categories['cat']).to eq 1
+    end
+  end
+
 end

@@ -34,3 +34,6 @@ vendor/assets/components/
 # sublime text
 *.sublime-project
 *.sublime-workspace
+
+# intelliJ
+.idea/

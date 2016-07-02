@@ -2,6 +2,7 @@ class PeriodicExpense < ActiveRecord::Base
 	validates :description, :start_date, :end_date, presence: true
 	validates :value, numericality: { greater_than: 0 }
 	before_save :set_dates_to_edges_of_month
+	belongs_to :category
 
   def truncated_description
     self.description[0..20]

@@ -6,6 +6,12 @@
   Description: <%= @expense.description %>
 </p>
 
+<% if @expense.category %>
+    <p>
+      Categoria: <%= link_to @expense.category.name, category_path(@expense.category) %>
+    </p>
+<% end %>
+
 <p>
   Value: <%= @expense.value %>
 </p>

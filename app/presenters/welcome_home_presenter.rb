@@ -1,11 +1,11 @@
-require "maths"
+require 'maths'
 
 class WelcomeHomePresenter
 
   attr_reader :budget_date
 
-  def initialize budget_date: nil, revenues: [], expenses: [], periodic_expenses: [], 
-    expected_expenses: [], contributions: [], contribution_factor: {}
+  def initialize(budget_date: nil, revenues: [], expenses: [], periodic_expenses: [],
+                 expected_expenses: [], contributions: [], contribution_factor: {})
     @budget_date = budget_date
     @revenues = revenues
     @expenses = expenses
@@ -15,9 +15,9 @@ class WelcomeHomePresenter
     @contribution_factor = contribution_factor
   end
 
-  def category
+  def categories
     categories = Hash.new(0)
-    @expenses.each do |expense|
+    @expenses.concat(@periodic_expenses).each do |expense|
       categories[expense.category.name] += expense.value if expense.category
     end
     categories
@@ -32,7 +32,7 @@ class WelcomeHomePresenter
   end
 
   def balance
-    return (total_contributions + total_revenues) - total_expenses
+    (total_contributions + total_revenues) - total_expenses
   end
 
   def total_contributions
@@ -40,7 +40,7 @@ class WelcomeHomePresenter
   end
 
   def contribution_factor_multiplier
-    return self.contribution_factor / 100
+    self.contribution_factor / 100
   end
 
   def contribution_factor
@@ -71,7 +71,7 @@ class WelcomeHomePresenter
 
   def formated_budget_date
     return @budget_date.strftime "%B %Y" if @budget_date
-    ""
+    ''
   end
 
   def revenues
