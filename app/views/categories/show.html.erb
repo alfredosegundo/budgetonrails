@@ -1,14 +1,27 @@
-<p>
-  <h3>Categoria</h3>
-</p>
+<div class="row">
+  <div class="large-2 columns">
+    <p>
+      <h3>Categoria</h3>
+    </p>
 
-<p>
-  Nome: <%= @category.name %>
-</p>
+    <p>
+      Nome: <%= @category.name %>
+    </p>
 
-<p>
-  Cor: <%= color_field_tag "color", @category.color, { disabled: "disabled" } %>
-</p>
+    <p>
+      Cor: <%= color_field_tag "color", @category.color, { disabled: "disabled" } %>
+    </p>
 
-<%= link_to 'Back', categories_path, class: "button tiny" %> |
-<%= link_to 'Edit', edit_category_path(@category), class: "button tiny" %>
+    <%= link_to 'Back', categories_path, class: "button tiny" %> |
+    <%= link_to 'Edit', edit_category_path(@category), class: "button tiny" %>
+  </div>
+
+  <div class="large-10 columns">
+  <p>
+    <h3>Despensas em <%= @budget_date.strftime("%B %Y") %></h3>
+    <h4>R$ <%= Maths.sum @periodic_expenses + @expenses, :value %></h4>
+  </p>
+  <%= render @periodic_expenses %>
+  <%= render @expenses %>
+  </div>
+</div>

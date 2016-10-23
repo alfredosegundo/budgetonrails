@@ -1,0 +1,30 @@
+<table>
+  <thead>
+  <tr>
+    <th colspan="6">Despesas únicas</th>
+  </tr>
+  </thead>
+  <tr>
+    <th>Descrição</th>
+    <th>Categoria</th>
+    <th>Valor</th>
+    <th colspan="3"></th>
+  </tr>
+
+  <% @expenses.each do |expense| %>
+      <tr>
+        <td>
+          <%= expense.description %>
+        </td>
+        <td>
+          <% if expense.category %>
+              <%= link_to expense.category.name, category_path(expense.category, budget_date: @budget_date), method: :get %>
+          <% end %>
+        </td>
+        <td><%= expense.value %></td>
+            <td><%= link_to 'Show', expense_path(expense) %></td>
+            <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
+        <td><%= link_to 'Destroy', expense_path(expense), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>

@@ -39,9 +39,9 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find category_show_params[:id]
     @budget_date = DateTime.parse(category_show_params[:budget_date] || DateTime.now.utc.to_s)
-    @expenses = Expense.get_expenses_same_month_of @budget_date
-    @periodic_expenses = PeriodicExpense.get_expenses_for_month(@budget_date)
-    @expected_expenses = ExpectedExpense.not_realized_on(@budget_date)
+    @expenses = Expense.get_expenses_same_month_of(@budget_date).where(category: @category)
+    @periodic_expenses = PeriodicExpense.get_expenses_for_month(@budget_date).where(category: @category)
+    @expected_expenses = ExpectedExpense.not_realized_on(@budget_date).where(category: @category)
   end
 
   private
