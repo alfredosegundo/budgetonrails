@@ -21,7 +21,7 @@
     <h3>Despensas em <%= @budget_date.strftime("%B %Y") %></h3>
     <h4>R$ <%= Maths.sum @periodic_expenses + @expenses, :value %></h4>
   </p>
-  <%= render @periodic_expenses %>
-  <%= render @expenses %>
+  <%= render 'periodic_expenses/periodic_expense', object: @periodic_expenses %>
+  <%= render 'expenses/expense', object: @expenses %>
   </div>
 </div>
