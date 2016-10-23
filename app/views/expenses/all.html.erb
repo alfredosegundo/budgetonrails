@@ -48,7 +48,7 @@
         </td>
         <td>
           <% if expense.category %>
-              <%= link_to expense.category.name, category_path(expense.category) %>
+              <%= link_to expense.category.name, category_path(expense.category, budget_date: @budget_date), method: :get %>
           <% end %>
         </td>
         <td><%= expense.value %></td>
@@ -81,7 +81,7 @@
         </td>
         <td>
           <% if expense.category %>
-            <%= link_to expense.category.name, category_path(expense.category) %>
+            <%= link_to expense.category.name, category_path(expense.category, budget_date: @budget_date), method: :get %>
           <% end %>
         </td>
         <td><%= expense.value %></td>
