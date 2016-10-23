@@ -37,11 +37,19 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find params[:id]
+    @category = Category.find category_show_params[:id]
+    @budget_date = DateTime.parse(category_show_params[:budget_date] || DateTime.now.utc.to_s)
+    @expenses = Expense.get_expenses_same_month_of @budget_date
+    @periodic_expenses = PeriodicExpense.get_expenses_for_month(@budget_date)
+    @expected_expenses = ExpectedExpense.not_realized_on(@budget_date)
   end
 
   private
     def category_params
       params.require(:category).permit(:color, :name)
+    end
+
+    def category_show_params
+      params.permit(:budget_date, :id)
     end
 end
