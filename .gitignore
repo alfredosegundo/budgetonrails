@@ -22,7 +22,7 @@
 bower_components
 
 # ignore gems
-/vendor/bundle
+/vendor/bundle*
 
 # ignore bower
 vendor/assets/components/
