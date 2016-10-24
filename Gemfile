@@ -51,3 +51,5 @@ gem 'rails_stdout_logging'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end
+
+gem 'spectrum-rails'
