@@ -1,12 +1,13 @@
 <table>
   <thead>
   <tr>
-    <th colspan="6">Despesas periódicas</th>
+    <th colspan="7">Despesas periódicas</th>
   </tr>
   </thead>
   <tr>
     <th>Descrição</th>
     <th>Categoria</th>
+    <th>Parcela</th>
     <th>Valor</th>
     <th colspan="3"></th>
   </tr>
@@ -20,6 +21,9 @@
           <% if expense.category %>
               <%= link_to expense.category.name, category_path(expense.category, budget_date: @budget_date), method: :get %>
           <% end %>
+        </td>
+        <td>
+          <%= "#{expense.current_installment(@budget_date)}/#{expense.installment_cycles}" %>
         </td>
         <td><%= expense.value %></td>
             <td><%= link_to 'Show', periodic_expense_path(expense) %></td>

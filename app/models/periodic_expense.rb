@@ -12,6 +12,17 @@ class PeriodicExpense < ActiveRecord::Base
 		PeriodicExpense.where("start_date <= ?", date).where("end_date >= ?", date)
 	end
 
+  def installment_cycles
+    return 0 if self.start_date > self.end_date
+    1 + (self.end_date.year * 12 + self.end_date.month) - (self.start_date.year * 12 + self.start_date.month)
+  end
+
+  def current_installment(date)
+    return 0 if date < self.start_date
+    return self.installment_cycles if date > self.end_date
+    1 + (date.year * 12 + date.month) - (self.start_date.year * 12 + self.start_date.month)
+  end
+
 	private
 		def set_dates_to_edges_of_month
 			self.end_date = self.end_date.end_of_month

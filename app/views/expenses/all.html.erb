@@ -1,5 +1,5 @@
 <h3>Despensas em <%= @budget_date.strftime("%B %Y") %></h3>
 
 <%= render 'expected_expenses/expected_expense', object: @expected_expenses %>
-<%= render 'periodic_expenses/periodic_expense', object: @periodic_expenses %>
+<%= render 'periodic_expenses/periodic_expense',  locals: { periodic_expenses: @periodic_expenses , budget_date: @budget_date } %>
 <%= render 'expenses/expense', object: @expenses %>
