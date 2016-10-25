@@ -1,6 +1,6 @@
 class PeriodicExpensesController < ApplicationController
   def index
-  	@expenses = PeriodicExpense.all
+    @expenses = PeriodicExpense.limit(100)
   end
 
   def new
@@ -9,12 +9,12 @@ class PeriodicExpensesController < ApplicationController
   end
 
   def create
-  	@expense = PeriodicExpense.new(expense_params)
-	if @expense.save
-    	redirect_to periodic_expense_path(@expense)
-  	else
-    	render 'new'
-  	end
+    @expense = PeriodicExpense.new(expense_params)
+    if @expense.save
+      redirect_to periodic_expense_path(@expense)
+    else
+      render 'new'
+    end
   end
 
   def show

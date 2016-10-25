@@ -1,7 +1,7 @@
 class ExpectedExpensesController < ApplicationController
 
   def index
-    @expenses = ExpectedExpense.all
+    @expenses = ExpectedExpense.limit(100)
   end
 
   def new
