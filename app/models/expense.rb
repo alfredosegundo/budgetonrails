@@ -1,6 +1,7 @@
 require "description_formater"
 
 class Expense < ActiveRecord::Base
+  validates :value, numericality: { greater_than: 0 }
   validates :description, :budget_date, :value, presence: true
   belongs_to :contributor
   before_save :set_buget_date_to_midnight
