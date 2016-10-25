@@ -1,34 +1,26 @@
 <h3>Nova categoria</h3>
 <%= form_for :category, url: categories_path do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> ao salvar:</h2>
-      <ul>
-      <% @category.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="row">
-    <div class="small-2 columns">
+    <% if @category.errors.any? %>  
+        <div id="error_explanation">
+          <h2><%= pluralize(@category.errors.count, "error") %> ao salvar:</h2>
+          <ul>
+            <% @category.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div>
       <%= f.label :name, class: "right inline" %>
-    </div>
-    <div class="small-5 columns end">
       <%= f.text_field :name %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
+    <div>
       <%= f.label :color, "Cor", class: "right inline" %>
-    </div>
-    <div class="small-3 columns end">
       <%= f.color_field :color %>
     </div>
-  </div>
-  <div class="row">
+    <div>
       <%= f.submit "Save", class: "button tiny right" %>
-  </div>
+    </div>
 <% end %>
 
 <%= link_to 'Back', categories_path %>

@@ -1,76 +1,61 @@
 <h3>New expense</h3>
 <%= form_for :expense, url: expenses_path do |f| %>
-  <% if @expense.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@expense.errors.count, "error") %> prohibited
-        this expense from being saved:</h2>
-      <ul>
-      <% @expense.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <% if @expected_expense %>
-    <div class="row">
-      <div class="small-3 columns">
-        Realizando despesa planejada:
-      </div>
-      <div class="small-5 columns end">
-        <%= @expected_expense.description %> R$<%= @expected_expense.value %>
-        <%= hidden_field(:expense, :expected_expense_id, :value => @expected_expense.id) %>
-      </div>
-    </div>
-  <% end %>
-  <div class="row">
-    <div class="small-2 columns">
-      <%= f.label :description, class: "right inline" %>
-    </div>
-    <div class="small-5 columns end">
+    <% if @expense.errors.any? %>
+          
+        <div id="error_explanation">
+              <h2><%= pluralize(@expense.errors.count, "error") %> prohibited
+                this expense from being saved:</h2>
+              
+          <ul>
+                
+            <% @expense.errors.full_messages.each do |msg| %>
+                      
+                <li><%= msg %></li>
+                    
+            <% end %>
+                
+          </ul>
+            
+        </div>
+          
+    <% end %>
+    <% if @expected_expense %>
+        <div>
+          <label>
+            Realizando despesa planejada:
+          </label>
+          <label>
+            <%= @expected_expense.description %> R$<%= @expected_expense.value %>
+            <%= hidden_field(:expense, :expected_expense_id, :value => @expected_expense.id) %>
+          </label>
+        </div>
+    <% end %>
+    <div>
+      <%= f.label :description %>
       <%= f.text_area :description %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
+    <div>
       <%= f.label :value, class: "right inline" %>
-    </div>
-    <div class="small-1 columns">
       <%= f.label :value, "R$", class: "prefix" %>
-    </div>
-    <div class="small-4 columns end">
       <%= f.text_field :value %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
+    <div>
       <%= f.label :category, "Categoria", class: "right inline" %>
-    </div>
-    <div class="small-3 columns end">
       <%= f.select(:category_id, options_from_collection_for_select(@categories, "id", "name", @expense.category_id), include_blank: true) %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-2 columns">
+    <div>
       <%= f.label :budget_date, "Budget", class: "right inline" %>
-    </div>
-    <div class="small-3 columns end">
       <%= date_select "expense", "budget_date", order: [:month, :year], default: DateTime.now %>
     </div>
-  </div>
-  <% if @contributors.any? %>
-    <div class="row">
-      <div class="small-2 columns">
-        <%= f.label :contributor_id, "Contributor", class: "right inline" %>
-      </div>
-      <div class="small-3 columns end">
-        <%= f.select(:contributor_id, options_from_collection_for_select(@contributors, "id", "firstName", @expense.contributor_id), include_blank: true) %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="row">
+    <% if @contributors.any? %>
+        <div>
+          <%= f.label :contributor_id, "Contributor", class: "right inline" %>
+          <%= f.select(:contributor_id, options_from_collection_for_select(@contributors, "id", "firstName", @expense.contributor_id), include_blank: true) %>
+        </div>
+    <% end %>
+    <div>
       <%= f.submit "Save", class: "button tiny right" %>
-  </div>
+    </div>
 <% end %>
 
 <%= link_to 'Back', expenses_path %>

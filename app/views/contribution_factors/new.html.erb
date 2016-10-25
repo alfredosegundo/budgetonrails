@@ -11,23 +11,15 @@
       </ul>
     </div>
   <% end %>
-  <div class="row">
-    <div class="small-2 columns">
+  <div>
       <%= f.label :factor, class: "right inline" %>
-    </div>
-    <div class="small-5 columns end">
       <%= f.text_field :factor %>
-    </div>
   </div>
-  <div class="row">
-    <div class="small-2 columns">
+  <div>
       <%= f.label :initial_date, "Initial date", class: "right inline" %>
-    </div>
-    <div class="small-3 columns end">
       <%= date_select "contribution_factor", "initial_date", order: [:month, :year], prompt: {month: 'Select month', year: 'Select year' } %>
-    </div>
   </div>
-  <div class="row">
+  <div>
       <%= f.submit "Save", class: "button tiny right" %>
   </div>
 <% end %>

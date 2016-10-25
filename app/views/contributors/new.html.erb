@@ -1,53 +1,43 @@
-<h1>New Contributor</h1>
+<h3>New Contributor</h3>
 <%= form_for :contributor, url: contributors_path do |f| %>
-  <% if @contributor.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@contributor.errors.count, "error") %> prohibited
-      this contributor from being saved:</h2>
-    <ul>
-    <% @contributor.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
-  <div class="row">
-    <div class="small-3 columns">
+    <% if @contributor.errors.any? %>
+          
+        <div id="error_explanation">
+              <h2><%= pluralize(@contributor.errors.count, "error") %> prohibited
+                this contributor from being saved:</h2>
+              
+          <ul>
+                
+            <% @contributor.errors.full_messages.each do |msg| %>
+                      
+                <li><%= msg %></li>
+                    
+            <% end %>
+                
+          </ul>
+            
+        </div>
+          
+    <% end %>
+    <div>
       <%= f.label :firstName, class: "right inline" %>
-    </div>
-    <div class="small-9 columns">
       <%= f.text_field :firstName %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-3 columns">
+    <div>
       <%= f.label :lastName, class: "right inline" %>
-    </div>
-    <div class="small-9 columns">
       <%= f.text_field :lastName %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-3 columns">
+    <div>
       <%= f.label :email, class: "right inline" %>
-    </div>
-    <div class="small-9 columns">
       <%= f.text_field :email %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-3 columns">
+    <div>
       <%= f.label :email_confirmation, class: "right inline" %>
-    </div>
-    <div class="small-9 columns">
       <%= f.text_field :email_confirmation %>
     </div>
-  </div>
-  <div class="row">
-    <div class="small-9 small-offset-3 columns">
+    <div>
       <%= f.submit %>
     </div>
-  </div>
 <% end %>
 
 <%= link_to 'Back', contributors_path %>

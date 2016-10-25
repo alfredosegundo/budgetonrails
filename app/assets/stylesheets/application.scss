@@ -6,3 +6,12 @@ table {
   @extend .table-bordered;
   @extend .table-striped;
 }
+
+form {
+  div {
+    @extend .form-group;
+    input:not(#category_color), textarea, select {
+      @extend .form-control
+    }
+  }
+}
