@@ -12,9 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
 //= require spectrum
-
-$(document).ready(function() {
-	$(document).foundation();
-});
