@@ -19,6 +19,7 @@ class RevenuesController < ApplicationController
     if @revenue.save
       redirect_to revenue_path(@revenue)
     else
+      @categories = Category.all.order(:created_at)
       render 'new'
     end
   end
@@ -33,6 +34,7 @@ class RevenuesController < ApplicationController
     if @revenue.update(revenue_params)
       redirect_to @revenue
     else
+      @categories = Category.all.order(:created_at)
       render 'edit'
     end
   end

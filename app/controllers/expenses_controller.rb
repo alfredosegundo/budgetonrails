@@ -25,6 +25,8 @@ class ExpensesController < ApplicationController
     if @expense.save
       redirect_to expense_path(@expense)
     else
+      @contributors = Contributor.all.order(:firstName)
+      @categories = Category.all.order(:created_at)
       render 'new'
     end
   end
@@ -44,6 +46,7 @@ class ExpensesController < ApplicationController
     if @expense.update(expense_params)
       redirect_to @expense
     else
+      @categories = Category.all.order(:created_at)
       render 'edit'
     end
   end
