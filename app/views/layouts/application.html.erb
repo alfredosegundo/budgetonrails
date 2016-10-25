@@ -1,85 +1,68 @@
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
-  <head>
-  	<meta charset="utf-8" />
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  	<!-- Uncomment to make IE8 render like IE7 -->
-  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+  <title><%= content_for?(:title) ? yield(:title) + " - Budget on rails" : "Budget on rails" %></title>
 
-  	<!-- Set the viewport width to device width for mobile -->
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+</head>
 
-  	<title><%= content_for?(:title) ? yield(:title) + " - Budget on rails" : "Budget on rails" %></title>
-
-  	<%= stylesheet_link_tag    "application" %>
-  	<%= javascript_include_tag "vendor/custom.modernizr" %>
-    <%= csrf_meta_tags %>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  </head>
-
-  <body>
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to "Início", home_url %></h1>
-        </li>
-        <li class="toggle-topbar menu-icon">
-          <a href="#">
-            <span>
-            </span>
-          </a>
-        </li>
-      </ul>
-      <section class="top-bar-section">
-        <ul class="right">
-          <li class="divider"></li>
-          <% if current_user %>
-            <li>
-              <%= link_to image_tag("#{user_image}"), {:id => current_user.id ,:action => 'show', :controller => 'contributors'} %>
-            </li>
-            <li><%= link_to "Sair", log_out_path %></li>
-          <% else %>
-            <li><%= link_to 'Entrar','/auth/google_oauth2' %></li>
-          <% end %>
-        </ul>
-
-        <ul class="left">
-          <li class="has-dropdown"><%= link_to "Despesas", expenses_path %>
-            <ul class="dropdown">
-              <li><label>escolha o tipo</label></li>
-              <li><%= link_to "Única", expenses_path %></li>
-              <li><%= link_to "Por período", periodic_expenses_path %></li>
-              <li><%= link_to "Planejada", expected_expenses_path %></li>
-            </ul>
+<body>
+<nav class="navbar navbar-dark bg-inverse">
+  <%= link_to 'Início', home_url, class: 'navbar-brand' %>
+  <ul class="nav navbar-nav">
+    <li class="nav-item dropdown">
+      <%= link_to 'Despesas', expenses_path, {id: 'expenses', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria_haspopup: 'true', aria_expanded: 'false'} %>
+      <div class="dropdown-menu" aria-labelledby="expenses">
+        <%= link_to "Única", expenses_path, class: 'dropdown-item' %>
+        <%= link_to "Por período", periodic_expenses_path, class: 'dropdown-item' %>
+        <%= link_to "Planejada", expected_expenses_path, class: 'dropdown-item' %>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <%= link_to 'Receitas', revenues_path, {id: 'revenue', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria_haspopup: 'true', aria_expanded: 'false'} %>
+      <div class="dropdown-menu" aria-labelledby="revenue">
+        <%= link_to "Nova", new_revenue_path, class: 'dropdown-item' %>
+        <%= link_to "Listar", revenues_path, class: 'dropdown-item' %>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <%= link_to "Categoria", categories_path, {class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria_haspopup: 'true', aria_expanded: 'false'} %>
+      <div class="dropdown-menu" aria-labelledby="revenue">
+        <%= link_to "Nova", new_category_path, class: 'dropdown-item' %>
+        <%= link_to "Listar", categories_path, class: 'dropdown-item' %>
+      </div>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Fator de contribuição", contribution_factors_path, class: "nav-link" %>
+    </li>
+  </ul>
+  <div class="form-inline float-xs-right">
+    <ul class="nav navbar-nav">
+      <% if current_user %>
+          <li class="nav-item float-lg-right">
+            <%= link_to "Sair", log_out_path, class: "nav-link" %>
           </li>
-          <li class="has-dropdown"><%= link_to "Receitas", revenues_path %>
-            <ul class="dropdown">
-              <li><%= link_to "Nova", new_revenue_path %></li>
-              <li><%= link_to "Listar", revenues_path %></li>
-            </ul>
+          <li class="nav-item float-lg-right">
+            <%= link_to image_tag("#{user_image}", size: "30x30"), {:id => current_user.id, :action => 'show', :controller => 'contributors'}, class: "nav-link" %>
           </li>
-          <li class="has-dropdown"><%= link_to "Categoria", categories_path %>
-            <ul class="dropdown">
-              <li><%= link_to "Nova", new_category_path %></li>
-              <li><%= link_to "Listar", categories_path %></li>
-            </ul>
-          </li>
-          <li><%= link_to "Fator de contribuição", contribution_factors_path %></li>
-        </ul>
-      </section>
-    </nav>
-    <div class="panel">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, class: name %>
+      <% else %>
+          <li class="nav-item float-lg-right"><%= link_to 'Entrar', '/auth/google_oauth2', class: "nav-link" %></li>
       <% end %>
-      <%= yield %>
-    </div>
-    
-    <%= javascript_include_tag "application" %>
-  </body>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: name %>
+  <% end %>
+  <%= yield %>
+</div>
+
+<%= javascript_include_tag "application" %>
+</body>
 </html>

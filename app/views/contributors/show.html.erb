@@ -6,14 +6,13 @@
 <% if @contributor.contributions.any? %>
   <table>
     <tr>
-      <th></th>
       <th>Value</th>
       <th>Since</th>
+      <th colspan="2"></th>
     </tr>
    
     <% @contributor.contributions.order(:budget_date).each do |contribution| %>
       <tr>
-        <td><%= contribution.id %></td>
         <td><%= contribution.amount %></td>
         <td><%= contribution.budget_date.strftime("%B %Y") %></td>
         <td><%= link_to 'Edit', edit_contributor_contribution_path(contribution.contributor, contribution) %></td>
