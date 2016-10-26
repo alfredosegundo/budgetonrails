@@ -1,7 +1,7 @@
 ruby '2.2.0'
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.9'
+gem 'rails', '>=4.1.9'
 gem 'pg', '~> 0.18.0'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
@@ -22,7 +22,7 @@ gem 'rails_12factor', group: :production
 gem 'rails_stdout_logging', group: :production
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 gem 'spectrum-rails'
