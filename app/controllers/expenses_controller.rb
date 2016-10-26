@@ -8,7 +8,7 @@ class ExpensesController < ApplicationController
   end
 
   def index
-    @expenses = Expense.limit(100).order(:budget_date).reverse_order
+    @expenses = Expense.eager_load(:category).limit(100).order(:budget_date).reverse_order
   end
 
   def new

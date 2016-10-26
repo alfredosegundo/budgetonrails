@@ -6,7 +6,7 @@ class RevenuesController < ApplicationController
   end
 
   def index
-    @revenues = Revenue.limit(100).order(:budget_date).reverse_order
+    @revenues = Revenue.eager_load(:category).limit(100).order(:budget_date).reverse_order
   end
 
   def new

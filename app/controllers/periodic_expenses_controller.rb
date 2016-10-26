@@ -1,11 +1,11 @@
 class PeriodicExpensesController < ApplicationController
   def index
-    @expenses = PeriodicExpense.limit(100)
+    @expenses = PeriodicExpense.eager_load(:category).limit(100).order(:start_date).reverse_order
   end
 
   def new
     @expense = PeriodicExpense.new() unless @expense
-    @categories = Category.all.order(:created_at)
+    @categories = Category.order(:created_at)
   end
 
   def create

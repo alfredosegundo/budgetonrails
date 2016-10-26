@@ -9,7 +9,7 @@ class PeriodicExpense < ActiveRecord::Base
   end
 
 	def self.get_expenses_for_month(date)
-		PeriodicExpense.where("start_date <= ?", date).where("end_date >= ?", date)
+		PeriodicExpense.eager_load(:category).where("start_date <= ?", date).where("end_date >= ?", date)
 	end
 
   def installment_cycles

@@ -8,14 +8,10 @@ class Expense < ActiveRecord::Base
   belongs_to :expected_expense
   belongs_to :category
 
-  def truncated_description
-    DescriptionFormater.truncate(description)
-  end
-
   def self.get_expenses_same_month_of date
     first_day_month = date.beginning_of_month
     last_day_month = date.end_of_month
-    Expense.where(:budget_date => first_day_month..last_day_month)
+    Expense.eager_load(:category).where(:budget_date => first_day_month..last_day_month)
   end
 
   def self.get_expenses_sum_for date
