@@ -2,9 +2,10 @@
 
 SUBCOMMAND_DESC="Helper for some git operations"
 SUBCOMMAND_HELP=$(cat <<EOH
-db                            backup production database.
-download-last|down            download most recent backup.
-load-local-from-backup|load   load into locahost [database] the most recent backup.
+db         backup production database.
+download   download most recent backup.
+load       load into locahost [database] the most recent backup.
+list       list all backups.
 
 EOH
 )
@@ -21,37 +22,35 @@ function isodate() {
     date +"%Y-%m-%dT%H.%M.%SZ"
 }
 
-function download() {
-    gdrive download $1
-}
-
 function query_backup_folder() {
-    gdrive list --query " '${BACKUP_FOLDER}' in parents " $@
-}
-function last-backup() {
-     query_backup_folder --order 'createdTime desc' --no-header --max 1
+    gdrive list --query " '${BACKUP_FOLDER}' in parents " "$@"
 }
 
-function last-backup-id() {
-    last-backup | column 1
+function last_backup_id() {
+    query_backup_folder --order 'createdTime desc' --no-header --max 1 | column 1
 }
 case ${1} in
     db)
         filename="$(isodate).dump"
         compressed_name="${filename}.tar.gz"
+        in_cyan "Reading backup from web"
         curl -o ${filename} `heroku pg:backups public-url`
-        tar -cvzf ${compressed_name} ${filename} --remove-files
+        in_cyan "Compressing into ${compressed_name}"
+        tar -cvzf ${compressed_name} ${filename}
+        in_cyan "Removing ${filename}"
+        rm ${filename}
+        in_cyan "Uploading to google drive"
         gdrive upload --delete --parent ${BACKUP_FOLDER} ${compressed_name}
     ;;
-    download-last|down)
-        download "$(last-backup-id)"
+    download)
+        gdrive download "$(last_backup_id)"
     ;;
-    load-local-from-backup|load)
+    load)
         if [ -z $2 ]; then
             in_red "You need to provide an database name."
             exit 1;
         fi
-        gdrive download --stdout "$(last-backup-id)" | tar xzf - -O | pg_restore --clean --no-acl --no-owner -h localhost -d $2
+        gdrive download --stdout "$(last_backup_id)" | tar xzf - -O | pg_restore --clean --no-acl --no-owner -h localhost -d $2
     ;;
     list|l)
         query_backup_folder
