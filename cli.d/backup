@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+SUBCOMMAND_DESC="Helper for some git operations"
+SUBCOMMAND_HELP=$(cat <<EOH
+db                            backup production database.
+download-last|down            download most recent backup.
+load-local-from-backup|load   load into locahost [database] the most recent backup.
+
+EOH
+)
+
+BACKUP_FOLDER="0ByYbR_Ai19aeMWhhOVJmVUg3NEU"
+
+function column() {
+    col=$1
+    shift
+    awk -v col="$col" '{print $col}' "${@--}"
+}
+
+function isodate() {
+    date +"%Y-%m-%dT%H.%M.%SZ"
+}
+
+function download() {
+    gdrive download $1
+}
+
+function query_backup_folder() {
+    gdrive list --query " '${BACKUP_FOLDER}' in parents " $@
+}
+function last-backup() {
+     query_backup_folder --order 'createdTime desc' --no-header --max 1
+}
+
+function last-backup-id() {
+    last-backup | column 1
+}
+case ${1} in
+    db)
+        filename="$(isodate).dump"
+        compressed_name="${filename}.tar.gz"
+        curl -o ${filename} `heroku pg:backups public-url`
+        tar -cvzf ${compressed_name} ${filename} --remove-files
+        gdrive upload --delete --parent ${BACKUP_FOLDER} ${compressed_name}
+    ;;
+    download-last|down)
+        download "$(last-backup-id)"
+    ;;
+    load-local-from-backup|load)
+        if [ -z $2 ]; then
+            in_red "You need to provide an database name."
+            exit 1;
+        fi
+        gdrive download --stdout "$(last-backup-id)" | tar xzf - -O | pg_restore --clean --no-acl --no-owner -h localhost -d $2
+    ;;
+    list|l)
+        query_backup_folder
+    ;;
+esac
